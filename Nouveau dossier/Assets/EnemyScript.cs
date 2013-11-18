@@ -65,7 +65,7 @@ public class EnemyScript
 	void Update () {
         _time += Time.deltaTime;
 
-        this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, _player.transform.position + _targetOffset);
+        this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, _player.transform.position);// + _targetOffset);
 
 	}
 
