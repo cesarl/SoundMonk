@@ -29,12 +29,12 @@ public class note : MonoBehaviour {
 
         transform.Translate(Vector3.left * Time.deltaTime);
 
-        Debug.Log("distanceSpawnerMoine" + distanceSpawnerMoine);
-        Debug.Log("distanceObjetMoine" + distanceObjetMoine);
+     /*   Debug.Log("distanceSpawnerMoine" + distanceSpawnerMoine);
+        Debug.Log("distanceObjetMoine" + distanceObjetMoine);*/
 
 
         transform.audio.volume = ac.Evaluate(((distanceSpawnerMoine - distanceObjetMoine) / distanceSpawnerMoine)); 
 
-       Debug.Log("volume" + transform.audio.volume);
+     //  Debug.Log("volume" + transform.audio.volume);
     }
 }
