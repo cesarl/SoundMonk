@@ -9,6 +9,7 @@ public class Controller2d : MonoBehaviour
 	private BoxCollider2D boxCollider;
 	public float verticalSpeed = 1.0f;
 	public float horizontalSpeed = 0.05f;
+    public float radius = 3.0f;
 
 	// Use this for initialization
 	void Start () {
