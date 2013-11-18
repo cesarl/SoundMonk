@@ -17,7 +17,7 @@ public class EnemyScript
 	void Start () {
         _player = GameObject.Find("Player");
 
-        float angle = getAngle(transform,_player.transform);
+        float angle = getAngle(transform.position,_player.transform.position);
 
         int[] rangeX = { - handleDistance, handleDistance };
         int[] rangeY = { - handleDistance, handleDistance };
@@ -50,15 +50,13 @@ public class EnemyScript
         _time = 0;
         _start = transform.position;
 
-        Transform t = _player.transform;
-        t.position = _handle2;
-        angle = getAngle(t, _player.transform);
+        Vector3 t = new Vector3(_handle2.x, _handle2.y, _handle2.z);
+        angle = getAngle(t, _player.transform.position);
 
         int d = (int)angle / 60;
         d *= 60;
 
         _targetOffset = new Vector3(_player.GetComponent<Controller2d>().radius * Mathf.Sin(d) , _player.GetComponent<Controller2d>().radius * Mathf.Cos(d), 0);
-
 	}
 	
 	// Update is called once per frame
@@ -94,10 +92,10 @@ Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector
     return p;
 }
 
-float getAngle(Transform t1, Transform pos)
+float getAngle(Vector3 t1, Vector3 pos)
 {
-    float dot = Vector3.Dot(t1.position, pos.position);
-    dot = dot / (t1.position.magnitude * pos.position.magnitude);
+    float dot = Vector3.Dot(t1, pos);
+    dot = dot / (t1.magnitude * pos.magnitude);
     float acos = Mathf.Acos(dot);
     float angle = acos * 180 / Mathf.PI;
     return angle;
