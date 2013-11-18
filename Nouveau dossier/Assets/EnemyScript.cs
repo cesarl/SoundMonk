@@ -4,7 +4,7 @@ using System.Collections;
 public class EnemyScript
     : MonoBehaviour {
 
-    public float speed = 10.0f;
+    public float speed = 3.0f;
     public int handleDistance = 3;
     GameObject _player;
     Vector3 _handle1;
@@ -28,9 +28,10 @@ public class EnemyScript
 
         if ((angle > 0 && angle < 90))
         {
-            rangeY[0] = 0;
-            rangeY[1] = handleDistance;
+            rangeY[0] = -handleDistance;
+            rangeY[1] = 0;
         }
+
         if (angle > 90 && angle < 180)
         {
             rangeX[0] = -handleDistance;
@@ -38,8 +39,8 @@ public class EnemyScript
         }
         if ((angle > 180 && angle < 270))
         {
-            rangeY[0] = -handleDistance;
-            rangeY[1] = 0;
+            rangeY[0] = 0;
+            rangeY[1] = handleDistance;
         }
         if (angle > 270 && angle <= 360)
         {
@@ -56,7 +57,6 @@ public class EnemyScript
 	
 	// Update is called once per frame
 	void Update () {
-        //this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, speed * Time.debugltaTime);
         _time += Time.deltaTime;
 
         this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, _player.transform.position);
