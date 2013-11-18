@@ -36,7 +36,7 @@ public class Spawner : MonoBehaviour
 		{
 			collided = true;
 			delay = 0.0f;
-			Debug.Log("visible");
+		//	Debug.Log("visible");
 		}
 
 		if (collided)
@@ -45,7 +45,7 @@ public class Spawner : MonoBehaviour
 			//Debug.Log("delay:" + delay);
 			if (delay >= tempsEntreSpawn)
 			{
-				Debug.Log("in if");
+			//	Debug.Log("in if");
 				nbNotes--;
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
 				go.GetComponent<noteSon>().typeSon = codeNotes[cpt];
@@ -54,7 +54,7 @@ public class Spawner : MonoBehaviour
 			}
 			if (nbNotes <= 0)
 			{
-				Debug.Log("delete");
+			//	Debug.Log("delete");
 				DestroyImmediate(this);
 			}
 		}

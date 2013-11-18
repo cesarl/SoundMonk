@@ -69,10 +69,10 @@ public class EnemyScript
 
 	}
 
-    void OnCollisionEnter2D(Collision2D collision) {
+    /*void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.name == "Player")
             Destroy(this.gameObject);
-    }
+    }*/
 
 Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
 {
