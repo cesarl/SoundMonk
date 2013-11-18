@@ -5,6 +5,7 @@ public class EnemyScript
     : MonoBehaviour {
 
     public float speed = 10.0f;
+    public int handleDistance = 3;
     GameObject _player;
     Vector3 _handle1;
     Vector3 _handle2;
@@ -14,17 +15,50 @@ public class EnemyScript
 	// Use this for initialization
 	void Start () {
         _player = GameObject.Find("Player");
-        _handle1 = transform.position + new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
-        _handle2 = _handle1 + new Vector3(Random.Range(-3, 3), Random.Range(-3, 3), 0);
+
+        float dot = Vector3.Dot(transform.position, _player.transform.position);
+        dot = dot / (transform.position.magnitude * _player.transform.position.magnitude);
+        float acos = Mathf.Acos(dot);
+        float angle = acos * 180 / Mathf.PI;
+
+        int[] rangeX = { - handleDistance, handleDistance };
+        int[] rangeY = { - handleDistance, handleDistance };
+
+        Debug.Log(angle);
+
+        if ((angle > 0 && angle < 90))
+        {
+            rangeY[0] = 0;
+            rangeY[1] = handleDistance;
+        }
+        if (angle > 90 && angle < 180)
+        {
+            rangeX[0] = -handleDistance;
+            rangeX[1] = 0;
+        }
+        if ((angle > 180 && angle < 270))
+        {
+            rangeY[0] = -handleDistance;
+            rangeY[1] = 0;
+        }
+        if (angle > 270 && angle <= 360)
+        {
+            rangeX[0] = 0;
+            rangeX[1] = handleDistance;
+        }
+
+
+        _handle1 = transform.position + new Vector3(Random.Range(rangeX[0], rangeX[1]), Random.Range(rangeY[0], rangeY[1]), 0);
+        _handle2 = _handle1 + new Vector3(Random.Range(rangeX[0], rangeX[1]), Random.Range(rangeY[0], rangeY[1]), 0);
         _time = 0;
         _start = transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        //this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, speed * Time.deltaTime);
+        //this.transform.position = Vector3.MoveTowards(this.transform.position, _player.transform.position, speed * Time.debugltaTime);
         _time += Time.deltaTime;
-        Debug.Log(_time / speed);
+
         this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, _player.transform.position);
 	}
 
