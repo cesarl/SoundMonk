@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TestSpawn : MonoBehaviour {
+public class noteSon : MonoBehaviour {
+
+	public int typeSon;
 
 	// Use this for initialization
 	void Start () {
@@ -11,10 +13,5 @@ public class TestSpawn : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 	
-	}
-
-	void OnCollisionEnter2D(Collision2D col)
-	{
-		Destroy(this);
 	}
 }
