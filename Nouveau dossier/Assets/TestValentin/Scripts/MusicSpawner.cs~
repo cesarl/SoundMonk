@@ -30,15 +30,3 @@ public class MusicSpawner : MonoBehaviour
 		lastTime = Time.time;
 	}
 }
-
-public class Spawn
-{
-	float	startTime;
-	Note[]	notes;
-
-	class Note
-	{
-		float offsetTime;
-		int gameObjectType;
-	}
-}

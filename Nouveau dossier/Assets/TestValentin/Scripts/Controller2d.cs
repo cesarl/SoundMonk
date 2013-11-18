@@ -25,12 +25,12 @@ public class Controller2d : MonoBehaviour
 			dir += new Vector2(1.0f, 0.0f) * verticalSpeed;
 		if (Input.GetKey("left"))
 			dir += new Vector2(-1.0f, 0.0f) * verticalSpeed;
-		dir += new Vector2(0.0f, 1.0f) * horizontalSpeed;
+		//dir += new Vector2(0.0f, 1.0f) * horizontalSpeed;
 		trans.Translate(dir * Time.deltaTime);
 	}
 
 	void OnCollisionEnter2D(Collision2D collision)
 	{
-		Debug.Log("test");
+		Destroy(collision.gameObject);
 	}
 }
