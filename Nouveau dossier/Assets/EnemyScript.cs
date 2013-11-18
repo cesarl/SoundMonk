@@ -13,6 +13,8 @@ public class EnemyScript
     Vector3 _start;
     Vector3 _targetOffset;
 
+    public AnimationCurve curve;
+
 	// Use this for initialization
 	void Start () {
         _player = GameObject.Find("Player");
@@ -64,6 +66,7 @@ public class EnemyScript
         _time += Time.deltaTime;
 
         this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, _player.transform.position + _targetOffset);
+
 	}
 
     void OnCollisionEnter2D(Collision2D collision) {
