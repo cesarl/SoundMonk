@@ -5,19 +5,28 @@ using System.Xml.Serialization;
 public class MusicSpawner : MonoBehaviour
 {
 	public float[] times;
-	public string[] name;
+	public GameObject[] instantiateModel;
 
 	private GameObject[]	spawners;
 	private float			lastTime;
 
-	// Use this for initialization
-	void Start () {
+	void Start ()
+	{
 		spawners = GameObject.FindGameObjectsWithTag("Spawner");
 		lastTime = 0.0f;
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+	{
+		foreach (var it in times)
+		{
+			if (it > lastTime && it < Time.time)
+			{
+				GameObject obj = Instantiate(instantiateModel[0]) as GameObject;
+				int idxSpawner = (int)Random.Range(0.0f, spawners.Length);
+				obj.transform.position = spawners[idxSpawner].transform.position;
+			}
+		}
+		lastTime = Time.time;
 	}
 }
