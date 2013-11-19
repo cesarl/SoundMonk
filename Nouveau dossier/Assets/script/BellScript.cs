@@ -21,6 +21,7 @@ public class BellScript : MonoBehaviour
     float mf_instantiateSongCount = 0;
     float timeIdle;
     float timeBetweenIdle = 0.1f;
+    int perfectCombo = 0;
 
     int idxIdle;
 
@@ -47,7 +48,7 @@ public class BellScript : MonoBehaviour
 
     void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (mi_indexWantedTransformPos == 0)
                 mi_indexWantedTransformPos = mt_bellWantedTransformPos.Length - 1;
@@ -56,7 +57,7 @@ public class BellScript : MonoBehaviour
             mt_wantedTransformPosition = mt_bellWantedTransformPos[mi_indexWantedTransformPos];
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (mi_indexWantedTransformPos == mt_bellWantedTransformPos.Length - 1)
                 mi_indexWantedTransformPos = 0;
@@ -149,9 +150,20 @@ public class BellScript : MonoBehaviour
                 mf_score += 300;
                 mf_accuracy += 1;
             }
+
+            if (tf_percentDistanceToPerfect <= 0.2f)
+                ++perfectCombo;
+            else
+                perfectCombo = 0;
+
             Debug.Log(collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x);
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Destroy(collision.gameObject);
+
+            if (perfectCombo == 3)
+                Debug.Log("Yeah Super Combo !!!");
+            Debug.Log("Combo : " + perfectCombo);
+
         }
     }
 
