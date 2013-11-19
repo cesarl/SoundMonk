@@ -45,39 +45,39 @@ public class BellScript : MonoBehaviour
 
     void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad1))
-        {
-            mt_wantedTransformPosition = mt_bellWantedTransformPos[0];
-            mf_bellActionTime = Time.time + mf_bellColorationTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            mt_wantedTransformPosition = mt_bellWantedTransformPos[1];
-            mf_bellActionTime = Time.time + mf_bellColorationTime;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Keypad4))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             mt_wantedTransformPosition = mt_bellWantedTransformPos[2];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad6))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             mt_wantedTransformPosition = mt_bellWantedTransformPos[3];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad7))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.UpArrow))
         {
             mt_wantedTransformPosition = mt_bellWantedTransformPos[4];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Keypad9))
+        if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[0];
+            mf_bellActionTime = Time.time + mf_bellColorationTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.UpArrow))
         {
             mt_wantedTransformPosition = mt_bellWantedTransformPos[5];
+            mf_bellActionTime = Time.time + mf_bellColorationTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[1];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
     }
