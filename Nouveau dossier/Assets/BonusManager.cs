@@ -20,6 +20,7 @@ public class BonusShield : Bonus
 
     void Start () {
         _time = 0.0f;
+        GameObject o = Instantiate(Resources.Load("Shield"), GameObject.FindWithTag("Player").transform.position, GameObject.FindWithTag("Player").transform.rotation) as GameObject;
 	}
 	
 	void Update () {
@@ -80,7 +81,7 @@ public class BonusManager : MonoBehaviour {
         _shieldIcon = GameObject.Find("shieldIcon");
         _shieldIcon.SetActive(false);
         _waveIcon = GameObject.Find("waveIcon");
-        _waveIcon.SetActive(false);
+       _waveIcon.SetActive(false);
 	}
 	
 	void Update () {
