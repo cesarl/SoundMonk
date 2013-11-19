@@ -10,8 +10,7 @@ public class Controller2d : MonoBehaviour
 	private int idxIdle;
 	private float timeIdle;
 
-	public float verticalSpeed = 1.0f;
-	//public float horizontalSpeed = 0.05f;
+	public float horizontalSpeed = 1.0f;
     public float radius = 3.0f;
 	public float timeBetweenIdle = 0.1f;
 	public Sprite[] idleSprites;
@@ -30,20 +29,20 @@ public class Controller2d : MonoBehaviour
 	// Update is called once per frame
 	void Update () {
 		Vector2	dir = new Vector2(0.0f, 0.0f);
-		//input
+
 		if (Input.GetKey("right"))
 		{
-			dir += new Vector2(1.0f, 0.0f) * verticalSpeed;
+            dir += new Vector2(1.0f, 0.0f) * horizontalSpeed;
 			spriteRenderer.sprite = rightSprite;
 		}
 		else if (Input.GetKey("left"))
 		{
-			dir += new Vector2(-1.0f, 0.0f) * verticalSpeed;
+            dir += new Vector2(-1.0f, 0.0f) * horizontalSpeed;
 			spriteRenderer.sprite = leftSprite;
 		}
 		else
 			spriteRenderer.sprite = idleSprites[idxIdle];
-		//dir += new Vector2(0.0f, 1.0f) * horizontalSpeed;
+
 		trans.Translate(dir * Time.deltaTime);
 		timeIdle += Time.deltaTime;
 		if (timeIdle > timeBetweenIdle)

@@ -8,8 +8,10 @@ public class BellScript : MonoBehaviour
     public float mf_score = 0;
     public float mf_accuracy = 0;
     public float mf_currentAccuracy = 1;
-    public float mf_smoothDamping = 2;
-    public float mf_bellColorationTime = 20f;
+    public float mf_smoothDamping = 20;
+    public float mf_bellColorationTime = 0.05f;
+
+    public Transform[] mt_bellWantedTransformPos;
 
     public Sprite[] idleSprites;
     private int idxIdle;
@@ -20,16 +22,12 @@ public class BellScript : MonoBehaviour
     float mf_bellActionTime;
     float mf_instantiateSongCount = 0;
 
-    Vector3 mv_wantedPosition;
+    Transform mt_wantedTransformPosition;
 
     // Use this for initialization
     void Start()
     {
-      
-        timeIdle = 0.0f;
-        mv_wantedPosition = transform.position;
-        idxIdle = 0;
-        spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+        mt_wantedTransformPosition = transform;
     }
 
     // Update is called once per frame
@@ -52,47 +50,49 @@ public class BellScript : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad1))
         {
-            mv_wantedPosition = player.transform.TransformPoint(new Vector3(-1, -1, this.transform.position.z));
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[0];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad3))
         {
-            mv_wantedPosition = player.transform.TransformPoint(new Vector3(1, -1, this.transform.position.z));
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[1];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad4))
         {
-            mv_wantedPosition = player.transform.TransformPoint(new Vector3(-1, 0, this.transform.position.z));
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[2];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad6))
         {
-            mv_wantedPosition = player.transform.TransformPoint(new Vector3(1, 0, this.transform.position.z));
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[3];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad7))
         {
-            mv_wantedPosition = player.transform.TransformPoint(new Vector3(-1, 1, this.transform.position.z));
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[4];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad9))
         {
-            mv_wantedPosition = player.transform.TransformPoint(new Vector3(1, 1, this.transform.position.z));
+            mt_wantedTransformPosition = mt_bellWantedTransformPos[5];
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
     }
 
     void MoveBell()
     {
-        this.transform.position = Vector3.Lerp(this.transform.position, mv_wantedPosition, Time.deltaTime * mf_smoothDamping);
+        this.transform.position = Vector3.Lerp(this.transform.position, mt_wantedTransformPosition.position, Time.deltaTime * mf_smoothDamping);
 
         if (mf_bellActionTime >= Time.time)
+        {
             this.renderer.material.color = Color.red;
+        }
         else
             this.renderer.material.color = Color.white;
     }
@@ -101,8 +101,8 @@ public class BellScript : MonoBehaviour
     {
         if (this.renderer.material.color == Color.red)
         {
-            float tf_distanceToPerfect = Vector3.Distance(mv_wantedPosition, collision.transform.position);
-            float tf_percentDistanceToPerfect = tf_distanceToPerfect / collision.gameObject.GetComponent<MeshFilter>().mesh.bounds.size.x;
+            float tf_distanceToPerfect = Vector3.Distance(mt_wantedTransformPosition.position, collision.transform.position);
+            float tf_percentDistanceToPerfect = tf_distanceToPerfect / collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
             if (tf_percentDistanceToPerfect > 1)
             {
                 mf_score += 0;
@@ -132,6 +132,8 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Destroy(collision.gameObject);
         }
+
+        Debug.Log("oui");
     }
 
     void CalculateAccuracy()
@@ -141,8 +143,11 @@ public class BellScript : MonoBehaviour
 
     void OnDrawGizmos()
     {
-        Gizmos.DrawSphere(mv_wantedPosition, 0.1f);
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(this.transform.position, 0.1f);
+        if (mt_wantedTransformPosition != null)
+        {
+            Gizmos.DrawSphere(mt_wantedTransformPosition.position, 0.1f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(this.transform.position, 0.1f);
+        }
     }
 }
