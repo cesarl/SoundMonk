@@ -108,32 +108,48 @@ public class BellScript : MonoBehaviour
             if (dist > 5.0f)
                 dist = 5;
             float percent = (5.0f-dist) / 5.0f;
+            float score = 0;
 
             if (percent < 0.1f)
             {
-                mf_score += 0;
+                score += 0;
             }
             else if (percent < 0.4f)
             {
-                mf_score += 60;
+                score += 60;
             }
             else if (percent < 0.6f)
             {
-                mf_score += 150;
+                score += 150;
             }
             else if (percent < 0.8f)
             {
-                mf_score += 220;
+                score += 220;
             }
             else
-                mf_score += 300.0f;
+                score += 300.0f;
 
             mf_accuracy += percent;
+
+            if (perfectCombo < 5)
+            {
+                score *= 2;
+            }
+            else if (perfectCombo < 10)
+            {
+                score *= 5;
+            }
+            else if (perfectCombo < 15)
+            {
+                score *= 10;
+            }
 
             if (percent >= 0.6f)
                 ++perfectCombo;
             else
                 perfectCombo = 0;
+
+            mf_score += score;
 
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Debug.Log(percent + ", " + dist);
