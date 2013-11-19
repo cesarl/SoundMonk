@@ -64,18 +64,18 @@ public class mainMenu : MonoBehaviour
         GUILayout.EndHorizontal();
         GUILayout.BeginHorizontal();
         GUILayout.Label("Bonus :");
-        if (mbs_bonusSelector.wave == "Shield")
+        if (mbs_bonusSelector.bonus == "Shield")
             GUI.color = Color.green;
         else
             GUI.color = Color.white;
         if (GUILayout.Button("Shield"))
-            mbs_bonusSelector.wave = "Shield";
-        if (mbs_bonusSelector.wave == "Wave")
+            mbs_bonusSelector.bonus = "Shield";
+        if (mbs_bonusSelector.bonus == "Wave")
             GUI.color = Color.green;
         else
             GUI.color = Color.white;
         if (GUILayout.Button("Wave"))
-            mbs_bonusSelector.wave = "Wave";
+            mbs_bonusSelector.bonus = "Wave";
         GUI.color = Color.white;
         GUILayout.EndHorizontal();
         GUILayout.EndVertical();
