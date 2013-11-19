@@ -49,19 +49,22 @@ public class EnemyScript
 		this.transform.position = Vector2.Lerp(_start,
 											   target.transform.position,
 											   _time / speed);
+   
         if (_time >= speed && _targetPlayerNow == -1)
         {
             _targetPlayerNow = 0;
             _start = transform.position;
         }
 
-        if (_time >= speed)
+      if (_time >= speed)
         {
             transform.position = Vector2.Lerp(_start,
 											   player.transform.position,
 											   _targetPlayerNow / 0.4f);
             _targetPlayerNow += Time.deltaTime;
         }
+        
+
 		timeIdle += Time.deltaTime;
 		if (timeIdle > timeBetweenIdle)
 		{
@@ -69,6 +72,8 @@ public class EnemyScript
 			idxIdle = (idxIdle + 1) % sprites.Length;
 			spriteRenderer.sprite = sprites[idxIdle];
 		}
+
+
 		Vector3 relativePos = target.position - transform.position;
 		Vector3 test;
 		if (_time >= speed)

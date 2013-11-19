@@ -26,9 +26,8 @@ public class Controller2d : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		Vector2	dir = new Vector2(0.0f, 0.0f);
-
-		if (Input.GetKey("d"))
+	//	Vector2	dir = new Vector2(0.0f, 0.0f);
+		/*if (Input.GetKey("d"))
 		{
             dir += new Vector2(1.0f, 0.0f) * horizontalSpeed;
 			spriteRenderer.sprite = rightSprite;
@@ -39,9 +38,18 @@ public class Controller2d : MonoBehaviour
 			spriteRenderer.sprite = leftSprite;
 		}
 		else
-			spriteRenderer.sprite = idleSprites[idxIdle];
+			spriteRenderer.sprite = idleSprites[idxIdle];*/
 
-		trans.Translate(dir * Time.deltaTime);
+		//trans.Translate(dir * Time.deltaTime);
+
+       /* Debug.Log("test");
+        for(int i =0; i< GameObject.FindGameObjectsWithTag("note").Length ;i++){
+            Debug.Log("test2");
+            Destroy(GameObject.FindGameObjectsWithTag("note")[i]);
+
+            GameObject.FindGameObjectsWithTag("note")[i].transform.Translate(-100.0f * dir * Time.deltaTime);
+        }*/
+
 		timeIdle += Time.deltaTime;
 		if (timeIdle > timeBetweenIdle)
 		{

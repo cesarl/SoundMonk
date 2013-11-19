@@ -39,13 +39,13 @@ public class comportementPerso : MonoBehaviour
     void OnTriggerStay2D(Collider2D collision)
     {
 
-        Debug.Log("vie :" + vie);
-        if (collision.gameObject.tag == "obstacles")
+     //   Debug.Log("vie :" + vie);
+       /* if (collision.gameObject.tag == "obstacles")
         {
             Destroy(collision.gameObject);
             vie -= viePerduParObstacle;
-            Debug.Log("vie :" + vie);
-        }
+        //    Debug.Log("vie :" + vie);
+        }*/
 
         if (collision.gameObject.tag == "note")
         {
@@ -58,7 +58,7 @@ public class comportementPerso : MonoBehaviour
                 audio.Play();
             }
             Destroy( collision.gameObject);
-            Debug.Log("vie :" + vie);
+           // Debug.Log("vie :" + vie);
         }
     }
 

@@ -50,7 +50,7 @@ public class BellScript : MonoBehaviour
 
     void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q))
         {
             if (mi_indexWantedTransformPos == 0)
                 mi_indexWantedTransformPos = mt_bellWantedTransformPos.Length - 1;
@@ -59,7 +59,7 @@ public class BellScript : MonoBehaviour
             mt_wantedTransformPosition = mt_bellWantedTransformPos[mi_indexWantedTransformPos];
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             if (mi_indexWantedTransformPos == mt_bellWantedTransformPos.Length - 1)
                 mi_indexWantedTransformPos = 0;
@@ -99,7 +99,7 @@ public class BellScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (this.renderer.material.color == Color.red && collision.tag != "Player")
+        if (this.renderer.material.color == Color.red && collision.tag != "Player" && !collision.tag.Equals("obstacles") )
         {
 
             CalculateAccuracy();
@@ -160,7 +160,7 @@ public class BellScript : MonoBehaviour
                 Debug.Log("Yeah Super Combo !!!");
             Debug.Log("Combo : " + perfectCombo);*/
 
-            audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
+           audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
           audio.Play();
         }
     }
