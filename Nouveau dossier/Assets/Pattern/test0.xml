@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfPatternNote xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
   <PatternNote>
     <timeSpawn>0.1</timeSpawn>
     <type>0</type>
@@ -29,5 +30,43 @@
     <speed>3.0</speed>
     <idSoundDestruction>1</idSoundDestruction>
     <idSprite>2</idSprite>
+    <color>
+      <r>0</r>
+      <g>1</g>
+      <b>0</b>
+      <a>1</a>
+    </color>
+  </PatternNote>
+  <PatternNote>
+    <timeSpawn>5.0</timeSpawn>
+    <type>0</type>
+    <damage>10</damage>
+    <idTarget>5</idTarget>
+    <idSound>0</idSound>
+    <speed>3.0</speed>
+    <idSoundDestruction>1</idSoundDestruction>
+    <idSprite>2</idSprite>
+    <color>
+      <r>1</r>
+      <g>0</g>
+      <b>1</b>
+      <a>1</a>
+    </color>
+  </PatternNote>
+  <PatternNote>
+    <timeSpawn>10.0</timeSpawn>
+    <type>0</type>
+    <damage>10</damage>
+    <idTarget>5</idTarget>
+    <idSound>0</idSound>
+    <speed>3.0</speed>
+    <idSoundDestruction>1</idSoundDestruction>
+    <idSprite>2</idSprite>
+    <color>
+      <r>0</r>
+      <g>0</g>
+      <b>1</b>
+      <a>1</a>
+    </color>
   </PatternNote>
 </ArrayOfPatternNote>
