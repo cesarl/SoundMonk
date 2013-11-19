@@ -4,6 +4,7 @@ using System.Collections;
 public class noteSon : MonoBehaviour {
 
 	public int typeSon;
+	public int hit;
 
 	// Use this for initialization
 	void Start () {
