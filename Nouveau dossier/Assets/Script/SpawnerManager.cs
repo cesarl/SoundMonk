@@ -10,7 +10,7 @@ public class SpawnerManager : MonoBehaviour {
 	public GameObject[] spawners;
 	public GameObject[] targets;
 	public UnityEngine.Object filePattern;
-	public Sprite[] sprites;
+	public GameObject[] spritesTab;
 
 	private int idx = 0;
 	private int nbNotes;
@@ -75,21 +75,19 @@ public class SpawnerManager : MonoBehaviour {
                 }
                 else
                 {
-                    Vector3 pos = spawners[notes[idx].idTarget].transform.position;
-                    go = Instantiate(note, pos, Quaternion.identity) as GameObject;
-                    mbs_bellScript.SendMessage("CalculateAccuracy");
-                    EnemyScript son = go.GetComponent<EnemyScript>();
-                    son.typeSon = notes[idx].type;
-                    son.damage = notes[idx].damage;
-                    son.target = targets[notes[idx].idTarget].transform;
-                    son.audio.clip = sounds[notes[idx].idSound];
-                    son.audio.Play();
-                    son.audio.loop = true;
-                    son.speed = notes[idx].speed;
-                    son.sonDestruction = sounds[notes[idx].idSoundDestruction];
-                    //son.Destruction = sounds[notes[idx].idSound];
-                    son.GetComponent<SpriteRenderer>().sprite = sprites[notes[idx].idSprite];
-                    idx++;
+					Vector3 pos = spawners[notes[idx].idTarget].transform.position;
+					go = Instantiate(note, pos, Quaternion.identity) as GameObject;
+					mbs_bellScript.SendMessage("CalculateAccuracy");
+					EnemyScript son = go.GetComponent<EnemyScript>();
+					son.typeSon = notes[idx].type;
+					son.damage = notes[idx].damage;
+					son.target = targets[notes[idx].idTarget].transform;
+					son.audio.clip = sounds[notes[idx].idSound];
+					son.audio.Play();
+					son.speed = notes[idx].speed;
+					son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+					son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
+					idx++;
                 }
 			}
 		}

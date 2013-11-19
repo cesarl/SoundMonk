@@ -6,10 +6,12 @@ public class EnemyScript
 {
 
 	public float speed = 3.0f;
+	public float timeBetweenIdle = 0.1f;
 	public int handleDistance = 3;
 	public Transform target;
 	public int typeSon;
     public AudioClip sonDestruction;
+	public Sprite[] sprites;
 
 
 	public int damage;
@@ -19,6 +21,10 @@ public class EnemyScript
 	Vector3 _start;
 	GameObject player;
 	float offsetX;
+
+	private int idxIdle;
+	private float timeIdle;
+	private SpriteRenderer spriteRenderer;
 
 	public AnimationCurve curve;
 
@@ -30,7 +36,10 @@ public class EnemyScript
 		player = GameObject.FindGameObjectWithTag("Player");
 		_time = 0;
 		_start = transform.position;
-       // audio.Play();
+		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
+		idxIdle = 0;
+		timeIdle = 0.0f;
+		spriteRenderer.sprite = sprites[idxIdle];
 	}
 
 	// Update is called once per frame
@@ -53,5 +62,12 @@ public class EnemyScript
 											   _targetPlayerNow / 0.4f);
             _targetPlayerNow += Time.deltaTime;
         }
+		timeIdle += Time.deltaTime;
+		if (timeIdle > timeBetweenIdle)
+		{
+			timeIdle = 0.0f;
+			idxIdle = (idxIdle + 1) % sprites.Length;
+			spriteRenderer.sprite = sprites[idxIdle];
+		}
 	}
 }
