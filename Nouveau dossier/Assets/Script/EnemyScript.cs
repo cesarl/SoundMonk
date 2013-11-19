@@ -69,5 +69,12 @@ public class EnemyScript
 			idxIdle = (idxIdle + 1) % sprites.Length;
 			spriteRenderer.sprite = sprites[idxIdle];
 		}
+		Vector3 relativePos = target.position - transform.position;
+		Vector3 test;
+		if (_time >= speed)
+			test = -Vector3.Normalize(player.transform.position - transform.position);
+		else
+			test = -Vector3.Normalize(target.position - transform.position);
+		transform.right = new Vector3(test.x, test.y, 0.0f);
 	}
 }
