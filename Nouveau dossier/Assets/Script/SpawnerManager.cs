@@ -75,7 +75,6 @@ public class SpawnerManager : MonoBehaviour {
                 {
 					Vector3 pos = spawners[notes[idx].idTarget].transform.position;
 					go = Instantiate(note, pos, Quaternion.identity) as GameObject;
-					mbs_bellScript.SendMessage("CalculateAccuracy");
 					EnemyScript son = go.GetComponent<EnemyScript>();
 					son.typeSon = notes[idx].type;
 					son.damage = notes[idx].damage;
