@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using System.IO;
 using System;
-using UnityEditor;
 public class SpawnerManager : MonoBehaviour {
 
 	public GameObject[] spawners;
@@ -40,7 +39,7 @@ public class SpawnerManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		loadPattern(AssetDatabase.GetAssetPath(filePattern));
+		notes = XmlDeserializeFromString < List<PatternNote> >(filePattern.ToString());
 		mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
 	}
 	
@@ -91,14 +90,20 @@ public class SpawnerManager : MonoBehaviour {
 		}
 	}
 
-	private bool loadPattern(string file)
+	public object XmlDeserializeFromString(string objectData, Type type)
 	{
-		XmlSerializer mySerializer = new XmlSerializer(typeof(List<PatternNote>));
-		using (FileStream reader = new FileStream(file, FileMode.Open))
+		var serializer = new XmlSerializer(type);
+		object result;
+
+		using (TextReader reader = new StringReader(objectData))
 		{
-			notes = mySerializer.Deserialize(reader) as List<PatternNote>;
+			result = serializer.Deserialize(reader);
 		}
-		return true;
+		return result;
 	}
 
+	public T XmlDeserializeFromString<T>(string objectData)
+	{
+		return (T)XmlDeserializeFromString(objectData, typeof(T));
+	}
 }
