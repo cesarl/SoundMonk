@@ -14,6 +14,7 @@ public class Bonus : MonoBehaviour
 
 public class BonusShield : Bonus
 {
+
     public float duration = 7.0f;
     public float radius = 2.0f;
     private float _time;
@@ -76,12 +77,15 @@ public class BonusManager : MonoBehaviour {
     private GameObject _shieldIcon;
     private GameObject _waveIcon;
 
+    private string typeBonus;
+
 	void Start () {
         bell = GameObject.Find("Bell");
         _shieldIcon = GameObject.Find("shieldIcon");
         _shieldIcon.SetActive(false);
         _waveIcon = GameObject.Find("waveIcon");
        _waveIcon.SetActive(false);
+        typeBonus = GameObject.Find("BonusSelector").GetComponent<BonusSelector>().bonus;
 	}
 	
 	void Update () {

@@ -14,6 +14,8 @@ public class BellScript : MonoBehaviour
     public Transform[] mt_bellWantedTransformPos;
     public Transform combo2;
 
+    public int maxBonus = 7;
+
 
     public Sprite[] idleSprites;
 
@@ -24,6 +26,8 @@ public class BellScript : MonoBehaviour
     float timeIdle;
     float timeBetweenIdle = 0.1f;
     public int perfectCombo = 0;
+    public int nbPerfect =0;
+
 
     int idxIdle;
 
@@ -46,11 +50,25 @@ public class BellScript : MonoBehaviour
         GetInput();
         MoveBell();
         ApplySpriteRenderer();
+
+
+
+        if (nbPerfect > maxBonus)
+        {
+            nbPerfect = 0;
+
+          /*  if(GameObject.Find("typeBonus"
+            shield = true;
+            _shieldIcon.SetActive(true);
+
+            wave = true;
+            _waveIcon.SetActive(true);*/
+        }
     }
 
     void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q))
         {
             if (mi_indexWantedTransformPos == 0)
                 mi_indexWantedTransformPos = mt_bellWantedTransformPos.Length - 1;
@@ -59,7 +77,7 @@ public class BellScript : MonoBehaviour
             mt_wantedTransformPosition = mt_bellWantedTransformPos[mi_indexWantedTransformPos];
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             if (mi_indexWantedTransformPos == mt_bellWantedTransformPos.Length - 1)
                 mi_indexWantedTransformPos = 0;
@@ -99,7 +117,7 @@ public class BellScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (this.renderer.material.color == Color.red && collision.tag != "Player")
+        if (this.renderer.material.color == Color.red && collision.tag != "Player" && !collision.tag.Equals("obstacles") )
         {
 
             CalculateAccuracy();
@@ -145,7 +163,10 @@ public class BellScript : MonoBehaviour
             }
 
             if (percent >= 0.6f)
+            {
                 ++perfectCombo;
+                ++nbPerfect;
+            }
             else
                 perfectCombo = 0;
 
@@ -160,7 +181,7 @@ public class BellScript : MonoBehaviour
                 Debug.Log("Yeah Super Combo !!!");
             Debug.Log("Combo : " + perfectCombo);*/
 
-            audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
+           audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
           audio.Play();
         }
     }
