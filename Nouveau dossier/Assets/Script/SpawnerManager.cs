@@ -70,7 +70,6 @@ public class SpawnerManager : MonoBehaviour {
                     son.speed = notes[idx].speed;
                     son.sonDestruction = sounds[notes[idx].idSoundDestruction];
                     idx++;
-                    
                 }
                 else
                 {
@@ -86,6 +85,7 @@ public class SpawnerManager : MonoBehaviour {
 					son.speed = notes[idx].speed;
 					son.sonDestruction = sounds[notes[idx].idSoundDestruction];
 					son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
+					son.gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 					idx++;
                 }
 			}
