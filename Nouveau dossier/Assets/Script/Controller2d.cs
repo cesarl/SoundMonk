@@ -42,6 +42,15 @@ public class Controller2d : MonoBehaviour
 			spriteRenderer.sprite = idleSprites[idxIdle];
 
 		trans.Translate(dir * Time.deltaTime);
+
+       /* Debug.Log("test");
+        for(int i =0; i< GameObject.FindGameObjectsWithTag("note").Length ;i++){
+            Debug.Log("test2");
+            Destroy(GameObject.FindGameObjectsWithTag("note")[i]);
+
+            GameObject.FindGameObjectsWithTag("note")[i].transform.Translate(-100.0f * dir * Time.deltaTime);
+        }*/
+
 		timeIdle += Time.deltaTime;
 		if (timeIdle > timeBetweenIdle)
 		{
