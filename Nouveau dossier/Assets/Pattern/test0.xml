@@ -7,7 +7,7 @@
     <idTarget>1</idTarget>
     <idSound>0</idSound>
     <speed>3.0</speed>
-    <idSoundDestruction>0</idSoundDestruction>
+    <idSoundDestruction>1</idSoundDestruction>
     <idSprite>0</idSprite>
   </PatternNote>
   <PatternNote>
@@ -17,7 +17,7 @@
     <idTarget>1</idTarget>
     <idSound>0</idSound>
     <speed>3.0</speed>
-    <idSoundDestruction>0</idSoundDestruction>
+    <idSoundDestruction>1</idSoundDestruction>
     <idSprite>1</idSprite>
   </PatternNote>
 </ArrayOfPatternNote>

@@ -171,8 +171,8 @@ public class BellScript : MonoBehaviour
                 Debug.Log("Yeah Super Combo !!!");
             Debug.Log("Combo : " + perfectCombo);*/
 
-            collision.gameObject.GetComponent<EnemyScript>().audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
-            collision.gameObject.GetComponent<EnemyScript>().audio.Play();
+            audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
+          audio.Play();
         }
     }
 
