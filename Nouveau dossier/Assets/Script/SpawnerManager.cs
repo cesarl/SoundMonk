@@ -65,6 +65,7 @@ public class SpawnerManager : MonoBehaviour {
 				son.audio.clip = sounds[notes[idx].idSound];
 				son.audio.Play();
 				son.speed = notes[idx].speed;
+                son.sonDestruction = sounds[notes[idx].idSoundDestruction];
 				//son.Destruction = sounds[notes[idx].idSound];
 				son.GetComponent<SpriteRenderer>().sprite = sprites[notes[idx].idSprite];
 				idx++;

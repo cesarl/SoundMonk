@@ -127,6 +127,8 @@ public class BellScript : MonoBehaviour
         {
             float tf_distanceToPerfect = Vector3.Distance(mt_wantedTransformPosition.position, collision.transform.position);
             float tf_percentDistanceToPerfect = tf_distanceToPerfect / collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
+
+
             if (tf_percentDistanceToPerfect > 2)
             {
                 mf_score += 0;
@@ -158,11 +160,11 @@ public class BellScript : MonoBehaviour
             else
                 perfectCombo = 0;
 
-            Debug.Log(collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x);
+          //  Debug.Log(collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x);
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Destroy(collision.gameObject);
 
-
+            Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
            
 /*
             if (perfectCombo == 3)
