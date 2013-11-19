@@ -9,6 +9,9 @@ public class EnemyScript
 	public int handleDistance = 3;
 	public Transform target;
 	public int typeSon;
+    public AudioSource sonDestruction;
+
+
 	public int damage;
 
 	float _time;
@@ -25,6 +28,7 @@ public class EnemyScript
 		player = GameObject.FindGameObjectWithTag("Player");
 		_time = 0;
 		_start = transform.position;
+        audio.Play();
 	}
 
 	// Update is called once per frame
