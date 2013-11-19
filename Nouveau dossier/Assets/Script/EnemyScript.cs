@@ -12,6 +12,7 @@ public class EnemyScript
 	public int damage;
 
 	float _time;
+    float _targetPlayerNow = -1;
 	Vector3 _start;
 	GameObject player;
 	float offsetX;
@@ -30,10 +31,21 @@ public class EnemyScript
 	void Update()
 	{
 		_time += Time.deltaTime;
-		//speed = 3.0f;
 		this.transform.position = Vector2.Lerp(_start,
 											   target.transform.position,
 											   _time / speed);
+        if (_time >= speed && _targetPlayerNow == -1)
+        {
+            _targetPlayerNow = 0;
+            _start = transform.position;
+        }
 
+        if (_time >= speed)
+        {
+            transform.position = Vector2.Lerp(_start,
+											   player.transform.position,
+											   _targetPlayerNow / 0.4f);
+            _targetPlayerNow += Time.deltaTime;
+        }
 	}
 }
