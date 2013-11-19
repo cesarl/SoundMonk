@@ -1,0 +1,21 @@
+﻿using UnityEngine;
+using System.Collections;
+
+public class BonusSelector : MonoBehaviour
+{
+
+    public float son = 0;
+    public string wave = "Shield";
+
+    // Use this for initialization
+    void Start()
+    {
+
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
+}
