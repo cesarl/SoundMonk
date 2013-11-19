@@ -11,6 +11,12 @@ public class BellScript : MonoBehaviour
     public float mf_smoothDamping = 2;
     public float mf_bellColorationTime = 20f;
 
+    public Sprite[] idleSprites;
+    private int idxIdle;
+    private SpriteRenderer spriteRenderer;
+    private float timeIdle;
+    public float timeBetweenIdle = 0.1f;
+
     float mf_bellActionTime;
     float mf_instantiateSongCount = 0;
 
@@ -19,7 +25,11 @@ public class BellScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+      
+        timeIdle = 0.0f;
         mv_wantedPosition = transform.position;
+        idxIdle = 0;
+        spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -27,6 +37,15 @@ public class BellScript : MonoBehaviour
     {
         GetInput();
         MoveBell();
+       
+        spriteRenderer.sprite = idleSprites[idxIdle];
+        timeIdle += Time.deltaTime;
+        if (timeIdle > timeBetweenIdle)
+        {
+            timeIdle = 0.0f;
+            idxIdle = (idxIdle + 1) % idleSprites.Length;
+        }
+
     }
 
     void GetInput()
