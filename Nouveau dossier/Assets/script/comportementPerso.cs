@@ -7,7 +7,6 @@ public class comportementPerso : MonoBehaviour
     public float vieMax;
     public float vie;
     public int viePerduParObstacle;
-    public int viePerduParNote;
 
     public Texture2D lifeBarFull;
     public Texture2D lifeBarEmpty;
@@ -39,7 +38,7 @@ public class comportementPerso : MonoBehaviour
     */
 
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "obstacle")
         {
@@ -51,12 +50,13 @@ public class comportementPerso : MonoBehaviour
 
         if (collision.gameObject.tag == "note")
         {
-            Destroy( collision.gameObject);
-            vie -= viePerduParNote; // Mathf.Lerp(vie, vie - viePerduParNote, Time.deltaTime*100);
+			noteSon note = collision.gameObject.GetComponent<noteSon>() as noteSon;
+			int hit = note.hit;
+            Destroy(collision.gameObject);
+			vie -= hit; // Mathf.Lerp(vie, vie - viePerduParNote, Time.deltaTime*100);
             Debug.Log("vie :" + vie);
           //  majBarreDeVie();
         }
-
     }
 
 
