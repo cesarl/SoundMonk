@@ -21,7 +21,7 @@ public class SpawnerManager : MonoBehaviour {
     public GameObject noteInvis;
 
 
-    public int soundType = 0;
+    public int soundType;
 	public AudioClip[] sounds;
     public AudioClip[] sounds2;
 
@@ -46,7 +46,7 @@ public class SpawnerManager : MonoBehaviour {
 		notes = XmlDeserializeFromString < List<PatternNote> >(filePattern.ToString());
 		mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
 
-
+        soundType = GameObject.Find("BonusSelector").GetComponent<BonusSelector>().son;
 	}
 	
 	// Update is called once per frame
