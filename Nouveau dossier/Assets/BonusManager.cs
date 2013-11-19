@@ -78,9 +78,9 @@ public class BonusManager : MonoBehaviour {
 	void Start () {
         bell = GameObject.Find("Bell");
         _shieldIcon = GameObject.Find("shieldIcon");
-       // _shieldIcon.SetActive(false);
+        _shieldIcon.SetActive(false);
         _waveIcon = GameObject.Find("waveIcon");
-     //   _waveIcon.SetActive(false);
+        _waveIcon.SetActive(false);
 	}
 	
 	void Update () {
