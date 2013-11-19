@@ -43,16 +43,25 @@ public class BonusShield : Bonus
 
 public class BonusWave : Bonus
 {
+    private float t = 0.0f;
+
     void Start () {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("note");
         foreach(GameObject e in enemies)
         {
             Destroy(e);
         }
+        
+        GameObject o = Instantiate(Resources.Load("Wave"), GameObject.FindWithTag("Player").transform.position, GameObject.FindWithTag("Player").transform.rotation) as GameObject;
 	}
 	
 	void Update () {
-        Destroy(gameObject.GetComponent<BonusWave>());
+        t += Time.deltaTime;
+        if (t > 0.5f)
+        {
+            Destroy(GameObject.FindWithTag("wave"));
+            Destroy(gameObject.GetComponent<BonusWave>());
+        }
 	}
 }
 
