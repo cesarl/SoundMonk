@@ -14,6 +14,8 @@ public class BellScript : MonoBehaviour
     public Transform[] mt_bellWantedTransformPos;
     public Transform combo2;
 
+    public int maxBonus = 7;
+
 
     public Sprite[] idleSprites;
 
@@ -48,6 +50,20 @@ public class BellScript : MonoBehaviour
         GetInput();
         MoveBell();
         ApplySpriteRenderer();
+
+
+
+        if (nbPerfect > maxBonus)
+        {
+            nbPerfect = 0;
+
+          /*  if(GameObject.Find("typeBonus"
+            shield = true;
+            _shieldIcon.SetActive(true);
+
+            wave = true;
+            _waveIcon.SetActive(true);*/
+        }
     }
 
     void GetInput()

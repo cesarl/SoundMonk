@@ -34,6 +34,9 @@ public class comportementPerso : MonoBehaviour
     {
         mf_score = mgs_bellScript.mf_score;
         mf_accuracy = mgs_bellScript.mf_currentAccuracy;
+
+
+
     }
 
     void OnTriggerStay2D(Collider2D collision)
@@ -69,7 +72,16 @@ public class comportementPerso : MonoBehaviour
         GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f* lifeBarEmpty.height * ((vie) / vieMax) ), lifeBarFull);
 
         GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
-      
+
+        //bombe : 7
+        //shield : 7
+        
+
+        GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarBack.width, 0.3f * lifeBarBack.height), lifeBarBack);
+        GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarEmpty.width, 0.3f * lifeBarEmpty.height *
+            (( GameObject.Find("Bell").GetComponent<BellScript>().nbPerfect) / 7)), lifeBarFull);
+        GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
+
 
         GUILayout.Label("Score : " + mf_score);
         GUILayout.Space(-10);

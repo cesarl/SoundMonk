@@ -76,7 +76,7 @@ public class BonusManager : MonoBehaviour {
     private GameObject _shieldIcon;
     private GameObject _waveIcon;
 
-
+    private string typeBonus;
 
 	void Start () {
         bell = GameObject.Find("Bell");
@@ -84,6 +84,9 @@ public class BonusManager : MonoBehaviour {
        // _shieldIcon.SetActive(false);
         _waveIcon = GameObject.Find("waveIcon");
      //   _waveIcon.SetActive(false);
+
+        typeBonus = GameObject.Find("BonusSelector").GetComponent<BonusSelector>().wave;
+
 	}
 	
 	void Update () {
