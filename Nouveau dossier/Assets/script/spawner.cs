@@ -50,6 +50,8 @@ public class Spawner : MonoBehaviour
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
 				go.GetComponent<noteSon>().typeSon = codeNotes[cpt];
 				delay = 0.0f;
+
+                //GameObject.Find("Cloche").GetComponent<comportementPerso>().SendMessage("coucou j appele ta methode mon copain !");
 				cpt++;
 			}
 			if (nbNotes <= 0)
