@@ -5,7 +5,7 @@ public class BonusSelector : MonoBehaviour
 {
 
     public float son = 0;
-    public string wave = "Shield";
+    public string bonus = "Shield";
 
     // Use this for initialization
     void Start()
