@@ -98,6 +98,24 @@ public class BonusManager : MonoBehaviour {
             _waveIcon.SetActive(true);
         }
 
+        if (b.perfectCombo < 2)
+        {
+            GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(0);
+        }
+        else if (b.perfectCombo < 5)
+        {
+            GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(2);
+        }
+        else if (b.perfectCombo < 9)
+        {
+            GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(5);
+        }
+        else
+        {
+GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(10);
+        }
+
+
         _lastPerfect = b.perfectCombo;
         updateInput();
 	}
