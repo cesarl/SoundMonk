@@ -61,7 +61,13 @@ public class musique : MonoBehaviour {
             audio.Play();
         }
 
-
+        GameObject.Find("Main Camera").GetComponent<AudioLowPassFilter>().cutoffFrequency =  (1- ( 
+            GameObject.Find("Player").GetComponent<comportementPerso>().vie/GameObject.Find("Player").GetComponent<comportementPerso>().vieMax)) * (float)(-5000.0) + 5000.0f ;
+        
+        GameObject.Find("Main Camera").GetComponent<AudioReverbFilter>().reverbLevel = ((1 - (
+            GameObject.Find("Player").GetComponent<comportementPerso>().vie / GameObject.Find("Player").GetComponent<comportementPerso>().vieMax)) * 9000.0f)-7000;
+         
+        
 
 	}
 
