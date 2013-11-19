@@ -13,6 +13,7 @@ public class spawner : MonoBehaviour
 
 	public UnityEngine.Object filePattern;
 	public AudioClip[] sounds;
+	public GameObject target;
 
 	private float delay;
 	private bool collided = false;
@@ -20,7 +21,6 @@ public class spawner : MonoBehaviour
 	private Camera myCamera;
 	private int idx = 0;
 	private int nbNotes;
-	private GameObject[] targets;
 
     BellScript mbs_bellScript;
 
@@ -32,6 +32,7 @@ public class spawner : MonoBehaviour
 		public int damage;
 		public int idTarget;
 		public int idSound;
+		public float speed;
 	}
 
 	List<PatternNote> notes;
@@ -43,7 +44,6 @@ public class spawner : MonoBehaviour
 		myCamera = Camera.main;
 		loadPattern(AssetDatabase.GetAssetPath(filePattern));
         mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
-		targets = GameObject.FindGameObjectsWithTag("bellSlot");
 	}
 
 
@@ -65,14 +65,19 @@ public class spawner : MonoBehaviour
 			delay += Time.deltaTime;
 			if (delay >= notes[idx].timeSpawn)
 			{
+				if (target.transform == null)
+					Debug.Log("fuck");
+				else
+					Debug.Log("ok");
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
                 mbs_bellScript.SendMessage("CalculateAccuracy");
 				EnemyScript son = go.GetComponent<EnemyScript>();
 				son.typeSon = notes[idx].type;
 				son.damage = notes[idx].damage;
-				son.target = targets[notes[idx].idTarget].transform;
+				son.target = target.transform;
 				son.audio.clip = sounds[notes[idx].idSound];
 				son.audio.Play();
+				son.speed = notes[idx].speed;
 				idx++;
 			}
 			if (idx >= notes.Count)
