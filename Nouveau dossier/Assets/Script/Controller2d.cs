@@ -28,12 +28,12 @@ public class Controller2d : MonoBehaviour
 	void Update () {
 		Vector2	dir = new Vector2(0.0f, 0.0f);
 
-		if (Input.GetKey("right"))
+		if (Input.GetKey("d"))
 		{
             dir += new Vector2(1.0f, 0.0f) * horizontalSpeed;
 			spriteRenderer.sprite = rightSprite;
 		}
-		else if (Input.GetKey("left"))
+		else if (Input.GetKey("a") || Input.GetKey("q"))
 		{
             dir += new Vector2(-1.0f, 0.0f) * horizontalSpeed;
 			spriteRenderer.sprite = leftSprite;
