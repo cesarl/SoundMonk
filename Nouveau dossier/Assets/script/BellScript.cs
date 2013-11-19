@@ -164,6 +164,8 @@ public class BellScript : MonoBehaviour
                 Debug.Log("Yeah Super Combo !!!");
             Debug.Log("Combo : " + perfectCombo);
 
+
+            collision.gameObject.GetComponent<EnemyScript>().sonDestruction.Play();
         }
     }
 

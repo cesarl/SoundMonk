@@ -9,6 +9,8 @@ public class comportementPerso : MonoBehaviour
     public int viePerduParObstacle;
     public int viePerduParNote;
 
+    public AudioSource sondegatRecu;
+
     public Texture2D lifeBarFull;
     public Texture2D lifeBarEmpty;
 
@@ -45,7 +47,7 @@ public class comportementPerso : MonoBehaviour
         if (collision.gameObject.tag == "note")
         {
             vie -= collision.gameObject.GetComponent<EnemyScript>().damage;
-            collision.gameObject.GetComponent<EnemyScript>().sonDestruction.Play();
+            sondegatRecu.Play();
             Destroy( collision.gameObject);
             Debug.Log("vie :" + vie);
         }
