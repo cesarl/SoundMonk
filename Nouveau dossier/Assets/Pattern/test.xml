@@ -5,11 +5,13 @@
     <type>0</type>
     <damage>10</damage>
     <idTarget>1</idTarget>
+    <idSound>0</idSound>
   </PatternNote>
   <PatternNote>
     <timeSpawn>1.5</timeSpawn>
     <type>0</type>
     <damage>50</damage>
     <idTarget>0</idTarget>
+    <idSound>0</idSound>
   </PatternNote>
 </ArrayOfPatternNote>

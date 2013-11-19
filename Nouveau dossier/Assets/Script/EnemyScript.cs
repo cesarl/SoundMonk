@@ -8,10 +8,16 @@ public class EnemyScript
     public float speed = 3.0f;
     public int handleDistance = 3;
     public Transform target;
+	public int typeSon;
+	public int damage;
+
     Vector3 _handle1;
     Vector3 _handle2;
     float _time;
     Vector3 _start;
+	bool _rushToPlayer;
+	GameObject player;
+	float offsetX;
 
     public AnimationCurve curve;
 
@@ -22,6 +28,10 @@ public class EnemyScript
 
         int[] rangeX = { -handleDistance, handleDistance };
         int[] rangeY = { -handleDistance, handleDistance };
+
+		player = GameObject.FindGameObjectWithTag("Player");
+		_rushToPlayer = false;
+		offsetX = target.position.x - player.transform.position.x;
 
         if ((angle > 0 && angle < 90))
         {
@@ -45,7 +55,6 @@ public class EnemyScript
             rangeX[1] = handleDistance;
         }
 
-
         _handle1 = transform.position + new Vector3(Random.Range(rangeX[0], rangeX[1]), Random.Range(rangeY[0], rangeY[1]), 0);
         _handle2 = _handle1 + new Vector3(Random.Range(rangeX[0], rangeX[1]), Random.Range(rangeY[0], rangeY[1]), 0);
         _time = 0;
@@ -62,8 +71,63 @@ public class EnemyScript
     void Update()
     {
         _time += Time.deltaTime;
-        this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, target.position);
+		/*if (!_rushToPlayer)
+		{
+			Vector2 dir = Vector2.zero;
+
+			if (typeSon == 0)
+				UpdateType0();
+			else if (typeSon == 1)*/
+				UpdateType1();
+			/*else if (typeSon == 2)
+				UpdateType2();
+			float distance = Vector2.Distance(transform.position, target.position);
+			if (distance < 0.1f)
+				_rushToPlayer = true;
+		}
+		else
+			this.transform.position = Vector2.Lerp(this.transform.position,
+												   player.transform.position,
+												   Time.deltaTime * 10.0f);*/
+			
     }
+
+	void UpdateType0()
+	{
+		this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1,
+														   _handle2, target.position);
+		Debug.Log("Here");
+	}
+
+	void UpdateType1()
+	{
+		/*Vector2 dir = Vector2.zero;
+		if (this.transform.position.y - target.transform.position.y < 5.0f &&
+			this.transform.position.y - target.transform.position.y > 2.0f)
+		{
+			if (offsetX < 0 && transform.position.x > target.transform.position.x)
+				dir += new Vector2(-1.0f, 0.0f);
+			else if (offsetX > 0 && transform.position.x < target.transform.position.x)
+				dir += new Vector2(1.0f, 0.0f);
+			if (dir != Vector2.zero)
+			{
+				this.transform.Translate(dir * Time.deltaTime * speed * 2);
+				Debug.Log(dir);
+			}
+		}
+		if (dir == Vector2.zero)
+		{*/
+			this.transform.position = Vector2.Lerp(this.transform.position,
+												   target.transform.position,
+												   Time.deltaTime);
+			//Debug.Log("lerp : " + dir);
+		//}
+	}
+
+	void UpdateType2()
+	{
+		//type code here
+	}
 
     Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
     {

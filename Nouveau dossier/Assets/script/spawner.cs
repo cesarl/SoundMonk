@@ -13,6 +13,7 @@ public class spawner : MonoBehaviour
 
 	public UnityEngine.Object filePattern;
 	public Transform[] targets;
+	public AudioClip[] sounds;
 
 	private float delay;
 	private bool collided = false;
@@ -30,6 +31,7 @@ public class spawner : MonoBehaviour
 		public int type;
 		public int damage;
 		public int idTarget;
+		public int idSound;
 	}
 
 	List<PatternNote> notes;
@@ -64,10 +66,12 @@ public class spawner : MonoBehaviour
 			{
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
                 mbs_bellScript.SendMessage("CalculateAccuracy");
-				noteSon son = go.GetComponent<noteSon>();
+				EnemyScript son = go.GetComponent<EnemyScript>();
 				son.typeSon = notes[idx].type;
-				son.hit = notes[idx].damage;
-				go.GetComponent<EnemyScript>().target = targets[notes[idx].idTarget].transform;
+				son.damage = notes[idx].damage;
+				son.target = targets[notes[idx].idTarget].transform;
+				son.audio.clip = sounds[notes[idx].idSound];
+				son.audio.Play();
 				idx++;
 			}
 			if (idx >= notes.Count)
