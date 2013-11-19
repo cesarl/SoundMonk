@@ -166,7 +166,11 @@ public class BellScript : MonoBehaviour
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+            Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
+>>>>>>> 117f5786fb06a863baa73849623e1ab679c9fd5d
 =======
             Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
 >>>>>>> 117f5786fb06a863baa73849623e1ab679c9fd5d
