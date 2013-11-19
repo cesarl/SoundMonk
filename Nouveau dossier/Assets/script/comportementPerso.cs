@@ -9,7 +9,7 @@ public class comportementPerso : MonoBehaviour
     public int viePerduParObstacle;
     public int viePerduParNote;
 
-    public AudioSource sondegatRecu;
+    public AudioClip sondegatRecu;
 
     public Texture2D lifeBarFull;
     public Texture2D lifeBarEmpty;
@@ -37,7 +37,9 @@ public class comportementPerso : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "obstacle")
+
+        Debug.Log("vie :" + vie);
+        if (collision.gameObject.tag == "obstacles")
         {
             Destroy(collision.gameObject);
             vie -= viePerduParObstacle;
@@ -47,7 +49,8 @@ public class comportementPerso : MonoBehaviour
         if (collision.gameObject.tag == "note")
         {
             vie -= collision.gameObject.GetComponent<EnemyScript>().damage;
-            sondegatRecu.Play();
+            audio.clip = sondegatRecu;
+            audio.Play();
             Destroy( collision.gameObject);
             Debug.Log("vie :" + vie);
         }

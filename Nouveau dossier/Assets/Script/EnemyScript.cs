@@ -9,7 +9,7 @@ public class EnemyScript
 	public int handleDistance = 3;
 	public Transform target;
 	public int typeSon;
-    public AudioSource sonDestruction;
+    public AudioClip sonDestruction;
 
 
 	public int damage;
@@ -25,6 +25,8 @@ public class EnemyScript
 	// Use this for initialization
 	void Start()
 	{
+        audio.clip = sonDestruction;
+        audio.loop = true;
 		player = GameObject.FindGameObjectWithTag("Player");
 		_time = 0;
 		_start = transform.position;
