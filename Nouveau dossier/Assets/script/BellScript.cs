@@ -12,6 +12,8 @@ public class BellScript : MonoBehaviour
     public float mf_bellColorationTime = 0.1f;
 
     public Transform[] mt_bellWantedTransformPos;
+    public Transform combo2;
+
 
     public Sprite[] idleSprites;
 
@@ -160,14 +162,18 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Destroy(collision.gameObject);
 
+
+           
+/*
             if (perfectCombo == 3)
                 Debug.Log("Yeah Super Combo !!!");
-            Debug.Log("Combo : " + perfectCombo);
+            Debug.Log("Combo : " + perfectCombo);*/
 
             collision.gameObject.GetComponent<EnemyScript>().audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
             collision.gameObject.GetComponent<EnemyScript>().audio.Play();
         }
     }
+
 
     void CalculateAccuracy()
     {

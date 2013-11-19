@@ -25,7 +25,7 @@ public class EnemyScript
 	// Use this for initialization
 	void Start()
 	{
-        audio.clip = sonDestruction;
+        //audio.clip = sonDestruction;
         audio.loop = true;
 		player = GameObject.FindGameObjectWithTag("Player");
 		_time = 0;
