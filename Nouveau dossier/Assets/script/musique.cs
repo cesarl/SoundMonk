@@ -3,11 +3,21 @@ using System.Collections;
 
 public class musique : MonoBehaviour {
 
-    public AudioClip musiqueNormale;
-    public AudioClip musiquePleinEnemis;
+    public AudioClip musiqueVilleNormale;
+    public AudioClip musiqueVillePleinEnemis;
+
+    public AudioClip musiqueCielNormale;
+    public AudioClip musiqueCielPleinEnemis;
+
+    public AudioClip musiqueEspaceNormale;
+    public AudioClip musiqueEspacePleinEnemis;
 
     public int nbEnemisModeRapide;
     public int nbEnemisModeLent;
+
+    public int etat = 0;
+
+
 
     public float volumeMusique;
 
@@ -16,7 +26,7 @@ public class musique : MonoBehaviour {
     private bool achange = false;
 	// Use this for initialization
 	void Start () {
-        audio.clip = musiqueNormale;
+        audio.clip = musiqueVilleNormale;
         audio.loop = true;
         audio.volume = volumeMusique;
         audio.Play();
@@ -24,6 +34,9 @@ public class musique : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+
+
+
 
         if (fadeout)
         {
@@ -46,7 +59,13 @@ public class musique : MonoBehaviour {
         if (audio.volume <= 0.1 && achange == true)
         {
             fadeout = false;
-            audio.clip = musiquePleinEnemis;
+
+            switch(etat){
+                case 0: audio.clip = musiqueVillePleinEnemis; break;
+                case 1: audio.clip = musiqueCielPleinEnemis; break;
+                case 2: audio.clip = musiqueEspacePleinEnemis; break;
+                 }
+
             audio.loop = true;
             audio.volume = volumeMusique;
             audio.Play();
@@ -55,7 +74,13 @@ public class musique : MonoBehaviour {
         if (audio.volume <= 0.1 && achange == false)
         {
             fadeout = false;
-            audio.clip = musiqueNormale;
+            switch (etat)
+            {
+                case 0: audio.clip = musiqueVilleNormale; break;
+                case 1: audio.clip = musiqueCielNormale; break;
+                case 2: audio.clip = musiqueEspaceNormale; break;
+            }
+
             audio.loop = true;
             audio.volume = volumeMusique;
             audio.Play();

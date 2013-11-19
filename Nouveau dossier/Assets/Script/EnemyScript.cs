@@ -26,11 +26,11 @@ public class EnemyScript
 	void Start()
 	{
         //audio.clip = sonDestruction;
-        audio.loop = true;
+        //audio.loop = true;
 		player = GameObject.FindGameObjectWithTag("Player");
 		_time = 0;
 		_start = transform.position;
-        audio.Play();
+       // audio.Play();
 	}
 
 	// Update is called once per frame
