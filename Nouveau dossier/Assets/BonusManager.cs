@@ -14,6 +14,7 @@ public class Bonus : MonoBehaviour
 
 public class BonusShield : Bonus
 {
+
     public float duration = 7.0f;
     public float radius = 2.0f;
     private float _time;
@@ -74,6 +75,8 @@ public class BonusManager : MonoBehaviour {
     private int _lastPerfect = 0;
     private GameObject _shieldIcon;
     private GameObject _waveIcon;
+
+
 
 	void Start () {
         bell = GameObject.Find("Bell");

@@ -24,6 +24,8 @@ public class BellScript : MonoBehaviour
     float timeIdle;
     float timeBetweenIdle = 0.1f;
     public int perfectCombo = 0;
+    public int nbPerfect =0;
+
 
     int idxIdle;
 
@@ -145,7 +147,10 @@ public class BellScript : MonoBehaviour
             }
 
             if (percent >= 0.6f)
+            {
                 ++perfectCombo;
+                ++nbPerfect;
+            }
             else
                 perfectCombo = 0;
 
