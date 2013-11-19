@@ -72,22 +72,30 @@ public class BonusManager : MonoBehaviour {
     private bool wave = false; 
     private GameObject bell;
     private int _lastPerfect = 0;
+    private GameObject _shieldIcon;
+    private GameObject _waveIcon;
 
 	void Start () {
         bell = GameObject.Find("Bell");
+        _shieldIcon = GameObject.Find("shieldIcon");
+        _shieldIcon.SetActive(false);
+        _waveIcon = GameObject.Find("waveIcon");
+        _waveIcon.SetActive(false);
 	}
 	
 	void Update () {
         BellScript b = bell.GetComponent<BellScript>();
 
-        if (b.perfectCombo == 7 && _lastPerfect != b.perfectCombo)
-        {
-            shield = true;
-        }
-
         if (b.perfectCombo == 10 && _lastPerfect != b.perfectCombo)
         {
+            shield = true;
+            _shieldIcon.SetActive(true);
+        }
+
+        if (b.perfectCombo == 2 && _lastPerfect != b.perfectCombo)
+        {
             wave = true;
+            _waveIcon.SetActive(true);
         }
 
         _lastPerfect = b.perfectCombo;
@@ -101,11 +109,14 @@ public class BonusManager : MonoBehaviour {
             if (shield)
             {
                 gameObject.AddComponent<BonusShield>();
+                _shieldIcon.SetActive(false);
                 shield = false;
             }
             else if (wave)
             {
-
+                wave = false;
+                _waveIcon.SetActive(false);
+                gameObject.AddComponent<BonusWave>();
             }
         }
     }

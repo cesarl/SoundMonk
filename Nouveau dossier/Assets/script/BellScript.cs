@@ -137,7 +137,6 @@ public class BellScript : MonoBehaviour
                 perfectCombo = 0;
 
             Debug.Log(percent + " " + dist);
-            Debug.Break();
 
 
             Destroy(collision.gameObject);
