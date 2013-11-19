@@ -71,15 +71,15 @@ public class EnemyScript
     void Update()
     {
         _time += Time.deltaTime;
-		/*if (!_rushToPlayer)
+		if (!_rushToPlayer)
 		{
 			Vector2 dir = Vector2.zero;
 
 			if (typeSon == 0)
 				UpdateType0();
-			else if (typeSon == 1)*/
+			else if (typeSon == 1)
 				UpdateType1();
-			/*else if (typeSon == 2)
+			else if (typeSon == 2)
 				UpdateType2();
 			float distance = Vector2.Distance(transform.position, target.position);
 			if (distance < 0.1f)
@@ -88,7 +88,7 @@ public class EnemyScript
 		else
 			this.transform.position = Vector2.Lerp(this.transform.position,
 												   player.transform.position,
-												   Time.deltaTime * 10.0f);*/
+												   Time.deltaTime * 10.0f);
 			
     }
 
@@ -96,7 +96,6 @@ public class EnemyScript
 	{
 		this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1,
 														   _handle2, target.position);
-		Debug.Log("Here");
 	}
 
 	void UpdateType1()
@@ -120,7 +119,6 @@ public class EnemyScript
 			this.transform.position = Vector2.Lerp(this.transform.position,
 												   target.transform.position,
 												   Time.deltaTime);
-			//Debug.Log("lerp : " + dir);
 		//}
 	}
 
