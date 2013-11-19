@@ -2,7 +2,7 @@
 <ArrayOfPatternNote xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <PatternNote>
     <timeSpawn>0.1</timeSpawn>
-    <type>0</type>
+    <type>-1</type>
     <damage>10</damage>
     <idTarget>1</idTarget>
     <idSound>0</idSound>
@@ -12,7 +12,7 @@
   </PatternNote>
   <PatternNote>
     <timeSpawn>1.0</timeSpawn>
-    <type>0</type>
+    <type>-1</type>
     <damage>10</damage>
     <idTarget>1</idTarget>
     <idSound>0</idSound>

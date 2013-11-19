@@ -19,6 +19,7 @@ public class SpawnerManager : MonoBehaviour {
 	BellScript mbs_bellScript;
 
 	public GameObject note;
+    public GameObject noteInvis;
 
 	public AudioClip[] sounds;
 
@@ -55,20 +56,41 @@ public class SpawnerManager : MonoBehaviour {
 			delay += Time.deltaTime;
 			if (delay >= notes[idx].timeSpawn)
 			{
-				Vector3 pos = spawners[notes[idx].idTarget].transform.position;
-				go = Instantiate(note, pos, Quaternion.identity) as GameObject;
-				mbs_bellScript.SendMessage("CalculateAccuracy");
-				EnemyScript son = go.GetComponent<EnemyScript>();
-				son.typeSon = notes[idx].type;
-				son.damage = notes[idx].damage;
-				son.target = targets[notes[idx].idTarget].transform;
-				son.audio.clip = sounds[notes[idx].idSound];
-				son.audio.Play();
-				son.speed = notes[idx].speed;
-                son.sonDestruction = sounds[notes[idx].idSoundDestruction];
-				//son.Destruction = sounds[notes[idx].idSound];
-				son.GetComponent<SpriteRenderer>().sprite = sprites[notes[idx].idSprite];
-				idx++;
+                if (notes[idx].type == -1)
+                {
+                    Vector3 pos = spawners[notes[idx].idTarget].transform.position;
+                    go = Instantiate(noteInvis, pos, Quaternion.identity) as GameObject;
+                    mbs_bellScript.SendMessage("CalculateAccuracy");
+                    EnemyScript son = go.GetComponent<EnemyScript>();
+                    son.typeSon = notes[idx].type;
+                    son.damage = notes[idx].damage;
+                    son.target = targets[notes[idx].idTarget].transform;
+                    son.audio.clip = sounds[notes[idx].idSound];
+                    son.audio.Play();
+                    son.audio.loop = true;
+                    son.speed = notes[idx].speed;
+                    son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+                    idx++;
+                    
+                }
+                else
+                {
+                    Vector3 pos = spawners[notes[idx].idTarget].transform.position;
+                    go = Instantiate(note, pos, Quaternion.identity) as GameObject;
+                    mbs_bellScript.SendMessage("CalculateAccuracy");
+                    EnemyScript son = go.GetComponent<EnemyScript>();
+                    son.typeSon = notes[idx].type;
+                    son.damage = notes[idx].damage;
+                    son.target = targets[notes[idx].idTarget].transform;
+                    son.audio.clip = sounds[notes[idx].idSound];
+                    son.audio.Play();
+                    son.audio.loop = true;
+                    son.speed = notes[idx].speed;
+                    son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+                    //son.Destruction = sounds[notes[idx].idSound];
+                    son.GetComponent<SpriteRenderer>().sprite = sprites[notes[idx].idSprite];
+                    idx++;
+                }
 			}
 		}
 	}
