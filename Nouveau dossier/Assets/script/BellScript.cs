@@ -129,16 +129,14 @@ public class BellScript : MonoBehaviour
                 mf_score += 300.0f;
 
             mf_accuracy += percent;
-            mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
 
             if (percent >= 0.6f)
                 ++perfectCombo;
             else
                 perfectCombo = 0;
 
-            Debug.Log(percent + " " + dist);
-            Debug.Break();
-
+            mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
+            Debug.Log(percent + ", " + dist);
 
             Destroy(collision.gameObject);
            
@@ -155,6 +153,7 @@ public class BellScript : MonoBehaviour
     void CalculateAccuracy()
     {
         mf_instantiateSongCount += 1;
+        mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
     }
 
     void OnDrawGizmos()
