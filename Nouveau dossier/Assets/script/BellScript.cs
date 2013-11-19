@@ -164,19 +164,7 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Destroy(collision.gameObject);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
             Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
->>>>>>> 117f5786fb06a863baa73849623e1ab679c9fd5d
-=======
-            Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
->>>>>>> 117f5786fb06a863baa73849623e1ab679c9fd5d
-=======
-            Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
->>>>>>> 117f5786fb06a863baa73849623e1ab679c9fd5d
            
 /*
             if (perfectCombo == 3)
