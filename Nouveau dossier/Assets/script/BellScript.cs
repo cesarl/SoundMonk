@@ -57,12 +57,16 @@ public class BellScript : MonoBehaviour
         {
             nbPerfect = 0;
 
-          /*  if(GameObject.Find("typeBonus"
-            shield = true;
-            _shieldIcon.SetActive(true);
-
-            wave = true;
-            _waveIcon.SetActive(true);*/
+            if (GameObject.Find("Player").GetComponent<BonusManager>().typeBonus.Equals("Shield"))
+            {
+                GameObject.Find("Player").GetComponent<BonusManager>().shield = true;
+                GameObject.Find("Player").GetComponent<BonusManager>()._shieldIcon.SetActive(true);
+            }
+            else
+            {
+                GameObject.Find("Player").GetComponent<BonusManager>().wave = true;
+               GameObject.Find("Player").GetComponent<BonusManager>()._waveIcon.SetActive(true);
+            }
         }
     }
 

@@ -78,8 +78,11 @@ public class comportementPerso : MonoBehaviour
         
 
         GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarBack.width, 0.3f * lifeBarBack.height), lifeBarBack);
+
+        // Debug.Log(GameObject.Find("Bell").GetComponent<BellScript>().nbPerfect);
+
         GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarEmpty.width, 0.3f * lifeBarEmpty.height *
-            (( GameObject.Find("Bell").GetComponent<BellScript>().nbPerfect) / 7)), lifeBarFull);
+            (( GameObject.Find("Bell").GetComponent<BellScript>().nbPerfect/ 7.0f) )), lifeBarFull);
         GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
 
 
