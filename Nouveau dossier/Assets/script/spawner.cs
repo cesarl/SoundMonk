@@ -60,15 +60,11 @@ public class spawner : MonoBehaviour
 			delay = 0.0f;
 		}
 
-		if (collided)
+		if (collided && notes.Count != 0)
 		{
 			delay += Time.deltaTime;
 			if (delay >= notes[idx].timeSpawn)
 			{
-				if (target.transform == null)
-					Debug.Log("fuck");
-				else
-					Debug.Log("ok");
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
                 mbs_bellScript.SendMessage("CalculateAccuracy");
 				EnemyScript son = go.GetComponent<EnemyScript>();
