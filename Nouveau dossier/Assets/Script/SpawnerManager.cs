@@ -21,7 +21,11 @@ public class SpawnerManager : MonoBehaviour {
 	public GameObject note;
     public GameObject noteInvis;
 
+
+    public int soundType = 0;
 	public AudioClip[] sounds;
+    public AudioClip[] sounds2;
+
 
 	[Serializable]
 	public class PatternNote
@@ -42,6 +46,8 @@ public class SpawnerManager : MonoBehaviour {
 	void Start () {
 		loadPattern(AssetDatabase.GetAssetPath(filePattern));
 		mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
+
+
 	}
 	
 	// Update is called once per frame
@@ -64,7 +70,15 @@ public class SpawnerManager : MonoBehaviour {
                     son.typeSon = notes[idx].type;
                     son.damage = notes[idx].damage;
                     son.target = targets[notes[idx].idTarget].transform;
-                    son.audio.clip = sounds[notes[idx].idSound];
+
+
+                    if (soundType == 0)
+                    {
+                        son.audio.clip = sounds[notes[idx].idSound];
+                    }
+                    else
+                        son.audio.clip = sounds2[notes[idx].idSound];
+
                     son.audio.Play();
                     son.audio.loop = true;
                     son.speed = notes[idx].speed;
@@ -81,7 +95,15 @@ public class SpawnerManager : MonoBehaviour {
 					son.typeSon = notes[idx].type;
 					son.damage = notes[idx].damage;
 					son.target = targets[notes[idx].idTarget].transform;
-					son.audio.clip = sounds[notes[idx].idSound];
+                   
+                    if (soundType == 0)
+                    {
+                        son.audio.clip = sounds[notes[idx].idSound];
+                    }
+                    else
+                        son.audio.clip = sounds2[notes[idx].idSound];
+
+
 					son.audio.Play();
 					son.speed = notes[idx].speed;
 					son.sonDestruction = sounds[notes[idx].idSoundDestruction];
