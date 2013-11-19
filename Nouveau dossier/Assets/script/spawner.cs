@@ -16,9 +16,11 @@ public class Spawner : MonoBehaviour
 	private float delay;
 	private bool collided = false;
 	private SpriteRenderer spriteRenderer;
-	private GameObject camera;
+	private Camera camera;
 	private int idx = 0;
 	private int nbNotes;
+
+    BellScript mbs_bellScript;
 
 	[Serializable]
 	public class PatternNote
@@ -28,14 +30,15 @@ public class Spawner : MonoBehaviour
 		public int damage;
 	}
 
-	public List<PatternNote> notes;
+	List<PatternNote> notes;
 
 	// Use this for initialization
 	void Start()
 	{
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-		camera = GameObject.FindGameObjectWithTag("MainCamera") as GameObject;
+        camera = Camera.main;
 		loadPattern(AssetDatabase.GetAssetPath(filePattern));
+        mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
 	}
 
 
@@ -58,6 +61,7 @@ public class Spawner : MonoBehaviour
 			if (delay >= notes[idx].timeSpawn)
 			{
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
+                mbs_bellScript.SendMessage("CalculateAccuracy");
 				go.GetComponent<noteSon>().typeSon = notes[idx].type;
 				idx++;
 			}
@@ -88,7 +92,6 @@ public class Spawner : MonoBehaviour
 		{
 			notes = mySerializer.Deserialize(reader) as List<PatternNote>;
 		}
-		Debug.Log(notes.Count);
 		return true;
 	}
 }

@@ -9,24 +9,29 @@ public class BellScript : MonoBehaviour
     public float mf_accuracy = 0;
     public float mf_currentAccuracy = 1;
     public float mf_smoothDamping = 20;
-    public float mf_bellColorationTime = 0.05f;
+    public float mf_bellColorationTime = 0.1f;
 
     public Transform[] mt_bellWantedTransformPos;
 
     public Sprite[] idleSprites;
-    private int idxIdle;
-    private SpriteRenderer spriteRenderer;
-    private float timeIdle;
-    public float timeBetweenIdle = 0.1f;
 
     float mf_bellActionTime;
     float mf_instantiateSongCount = 0;
+    float timeIdle;
+    float timeBetweenIdle = 0.1f;
+
+    int idxIdle;
 
     Transform mt_wantedTransformPosition;
+
+    SpriteRenderer spriteRenderer;
 
     // Use this for initialization
     void Start()
     {
+        timeIdle = 0.0f;
+        idxIdle = 0;
+        spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
         mt_wantedTransformPosition = transform;
     }
 
@@ -35,15 +40,7 @@ public class BellScript : MonoBehaviour
     {
         GetInput();
         MoveBell();
-       
-        spriteRenderer.sprite = idleSprites[idxIdle];
-        timeIdle += Time.deltaTime;
-        if (timeIdle > timeBetweenIdle)
-        {
-            timeIdle = 0.0f;
-            idxIdle = (idxIdle + 1) % idleSprites.Length;
-        }
-
+        ApplySpriteRenderer();
     }
 
     void GetInput()
@@ -97,28 +94,39 @@ public class BellScript : MonoBehaviour
             this.renderer.material.color = Color.white;
     }
 
-    void OnCollisionStay(Collision collision)
+    void ApplySpriteRenderer()
     {
-        if (this.renderer.material.color == Color.red)
+        spriteRenderer.sprite = idleSprites[idxIdle];
+        timeIdle += Time.deltaTime;
+        if (timeIdle > timeBetweenIdle)
+        {
+            timeIdle = 0.0f;
+            idxIdle = (idxIdle + 1) % idleSprites.Length;
+        }
+    }
+
+    void OnTriggerStay2D(Collider2D collision)
+    {
+        if (this.renderer.material.color == Color.red && collision.tag != "Player")
         {
             float tf_distanceToPerfect = Vector3.Distance(mt_wantedTransformPosition.position, collision.transform.position);
             float tf_percentDistanceToPerfect = tf_distanceToPerfect / collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
-            if (tf_percentDistanceToPerfect > 1)
+            if (tf_percentDistanceToPerfect > 2)
             {
                 mf_score += 0;
                 mf_accuracy += 0;
             }
-            else if (tf_percentDistanceToPerfect > 0.5f)
+            else if (tf_percentDistanceToPerfect > 1f)
             {
                 mf_score += 60;
                 mf_accuracy += 0.2f;
             }
-            else if (tf_percentDistanceToPerfect > 0.2f)
+            else if (tf_percentDistanceToPerfect > 0.4f)
             {
                 mf_score += 150;
                 mf_accuracy += 0.5f;
             }
-            else if (tf_percentDistanceToPerfect > 0.1f)
+            else if (tf_percentDistanceToPerfect > 0.2f)
             {
                 mf_score += 240;
                 mf_accuracy += 0.8f;
@@ -128,12 +136,10 @@ public class BellScript : MonoBehaviour
                 mf_score += 300;
                 mf_accuracy += 1;
             }
-
+            Debug.Log(collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x);
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Destroy(collision.gameObject);
         }
-
-        Debug.Log("oui");
     }
 
     void CalculateAccuracy()
