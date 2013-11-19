@@ -49,6 +49,7 @@ public class comportementPerso : MonoBehaviour
 
         if (collision.gameObject.tag == "note")
         {
+            GameObject.Find("Bell").GetComponent<BellScript>().SendMessage("CalculateAccuracy");
             vie -= collision.gameObject.GetComponent<EnemyScript>().damage;
             if (sondegatRecu != null)
             {

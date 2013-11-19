@@ -72,30 +72,6 @@ public class BellScript : MonoBehaviour
         {
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
-
-        //if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.UpArrow))
-        //{
-        //    mt_wantedTransformPosition = mt_bellWantedTransformPos[4];
-        //    mf_bellActionTime = Time.time + mf_bellColorationTime;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.LeftArrow) && Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.LeftArrow) && Input.GetKeyDown(KeyCode.DownArrow))
-        //{
-        //    mt_wantedTransformPosition = mt_bellWantedTransformPos[0];
-        //    mf_bellActionTime = Time.time + mf_bellColorationTime;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.UpArrow))
-        //{
-        //    mt_wantedTransformPosition = mt_bellWantedTransformPos[5];
-        //    mf_bellActionTime = Time.time + mf_bellColorationTime;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.RightArrow) && Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.RightArrow) && Input.GetKeyDown(KeyCode.DownArrow))
-        //{
-        //    mt_wantedTransformPosition = mt_bellWantedTransformPos[1];
-        //    mf_bellActionTime = Time.time + mf_bellColorationTime;
-        //}
     }
 
     void MoveBell()
@@ -125,49 +101,48 @@ public class BellScript : MonoBehaviour
     {
         if (this.renderer.material.color == Color.red && collision.tag != "Player")
         {
-            float tf_distanceToPerfect = Vector3.Distance(mt_wantedTransformPosition.position, collision.transform.position);
-            float tf_percentDistanceToPerfect = tf_distanceToPerfect / collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x;
 
+            CalculateAccuracy();
 
-            if (tf_percentDistanceToPerfect > 2)
+            float dist = (10.0f * Vector2.Distance(collision.gameObject.transform.position, mt_wantedTransformPosition.position));
+            if (dist > 5.0f)
+                dist = 5;
+            float percent = (5.0f-dist) / 5.0f;
+
+            if (percent < 0.1f)
             {
                 mf_score += 0;
-                mf_accuracy += 0;
             }
-            else if (tf_percentDistanceToPerfect > 1f)
+            else if (percent < 0.4f)
             {
                 mf_score += 60;
-                mf_accuracy += 0.2f;
             }
-            else if (tf_percentDistanceToPerfect > 0.4f)
+            else if (percent < 0.6f)
             {
                 mf_score += 150;
-                mf_accuracy += 0.5f;
             }
-            else if (tf_percentDistanceToPerfect > 0.2f)
+            else if (percent < 0.8f)
             {
-                mf_score += 240;
-                mf_accuracy += 0.8f;
+                mf_score += 220;
             }
             else
-            {
-                mf_score += 300;
-                mf_accuracy += 1;
-            }
+                mf_score += 300.0f;
 
-            if (tf_percentDistanceToPerfect <= 0.2f)
+            mf_accuracy += percent;
+            mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
+
+            if (percent >= 0.6f)
                 ++perfectCombo;
             else
                 perfectCombo = 0;
 
-          //  Debug.Log(collision.gameObject.GetComponent<SpriteRenderer>().bounds.size.x);
-            mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
-            Destroy(collision.gameObject);
+            Debug.Log(percent + " " + dist);
+            Debug.Break();
 
-            Debug.Log(" TEST : " + tf_percentDistanceToPerfect);
+
+            Destroy(collision.gameObject);
            
-/*
-            if (perfectCombo == 3)
+/*            if (perfectCombo == 3)
                 Debug.Log("Yeah Super Combo !!!");
             Debug.Log("Combo : " + perfectCombo);*/
 
