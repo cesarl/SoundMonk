@@ -3,11 +3,13 @@
   <PatternNote>
     <timeSpawn>0.1</timeSpawn>
     <type>0</type>
-    <damage>0</damage>
+    <damage>10</damage>
+    <idTarget>1</idTarget>
   </PatternNote>
   <PatternNote>
     <timeSpawn>1.5</timeSpawn>
     <type>0</type>
-    <damage>0</damage>
+    <damage>50</damage>
+    <idTarget>0</idTarget>
   </PatternNote>
 </ArrayOfPatternNote>

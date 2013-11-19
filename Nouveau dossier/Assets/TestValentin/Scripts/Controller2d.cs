@@ -6,7 +6,6 @@ public class Controller2d : MonoBehaviour
 
 	private Transform trans;
 	private SpriteRenderer spriteRenderer;
-	private BoxCollider2D boxCollider;
 	private int idxIdle;
 	private float timeIdle;
 
@@ -21,7 +20,6 @@ public class Controller2d : MonoBehaviour
 	void Start () {
 		trans = transform;
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-		boxCollider = this.gameObject.GetComponent<BoxCollider2D>();
 		idxIdle = 0;
 		timeIdle = 0.0f;
 	}

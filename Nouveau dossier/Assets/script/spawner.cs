@@ -6,17 +6,18 @@ using System.IO;
 using System;
 using UnityEditor;
 
-public class Spawner : MonoBehaviour
+public class spawner : MonoBehaviour
 {
 
 	public GameObject note;
 
 	public UnityEngine.Object filePattern;
+	public Transform[] targets;
 
 	private float delay;
 	private bool collided = false;
 	private SpriteRenderer spriteRenderer;
-	private Camera camera;
+	private Camera myCamera;
 	private int idx = 0;
 	private int nbNotes;
 
@@ -28,6 +29,7 @@ public class Spawner : MonoBehaviour
 		public float timeSpawn;
 		public int type;
 		public int damage;
+		public int idTarget;
 	}
 
 	List<PatternNote> notes;
@@ -36,7 +38,7 @@ public class Spawner : MonoBehaviour
 	void Start()
 	{
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
-        camera = Camera.main;
+		myCamera = Camera.main;
 		loadPattern(AssetDatabase.GetAssetPath(filePattern));
         mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
 	}
@@ -49,7 +51,7 @@ public class Spawner : MonoBehaviour
 
 		if (notes == null)
 			return;
-		if (IsVisibleFrom(spriteRenderer, camera.camera) && !collided)
+		if (IsVisibleFrom(spriteRenderer, myCamera.camera) && !collided)
 		{
 			collided = true;
 			delay = 0.0f;
@@ -62,7 +64,10 @@ public class Spawner : MonoBehaviour
 			{
 				go = Instantiate(note, transform.position, Quaternion.identity) as GameObject;
                 mbs_bellScript.SendMessage("CalculateAccuracy");
-				go.GetComponent<noteSon>().typeSon = notes[idx].type;
+				noteSon son = go.GetComponent<noteSon>();
+				son.typeSon = notes[idx].type;
+				son.hit = notes[idx].damage;
+				go.GetComponent<EnemyScript>().target = targets[notes[idx].idTarget].transform;
 				idx++;
 			}
 			if (idx >= notes.Count)

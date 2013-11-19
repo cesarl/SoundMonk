@@ -7,21 +7,18 @@ public class EnemyScript
 
     public float speed = 3.0f;
     public int handleDistance = 3;
-    GameObject _player;
+    public Transform target;
     Vector3 _handle1;
     Vector3 _handle2;
     float _time;
     Vector3 _start;
-    Vector3 _targetOffset;
 
     public AnimationCurve curve;
 
     // Use this for initialization
     void Start()
     {
-        _player = GameObject.Find("Player");
-
-        float angle = getAngle(transform.position, _player.transform.position);
+        float angle = getAngle(transform.position, target.position);
 
         int[] rangeX = { -handleDistance, handleDistance };
         int[] rangeY = { -handleDistance, handleDistance };
@@ -55,21 +52,17 @@ public class EnemyScript
         _start = transform.position;
 
         Vector3 t = new Vector3(_handle2.x, _handle2.y, _handle2.z);
-        angle = getAngle(t, _player.transform.position);
+        angle = getAngle(t, target.position);
 
         int d = (int)angle / 60;
         d *= 60;
-
-        _targetOffset = new Vector3(_player.GetComponent<Controller2d>().radius * Mathf.Sin(d), _player.GetComponent<Controller2d>().radius * Mathf.Cos(d), 0);
     }
 
     // Update is called once per frame
     void Update()
     {
         _time += Time.deltaTime;
-
-        this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, _player.transform.position);// + _targetOffset);
-
+        this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1, _handle2, target.position);
     }
 
     Vector3 CalculateBezierPoint(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)

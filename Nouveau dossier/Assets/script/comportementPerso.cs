@@ -33,7 +33,7 @@ public class comportementPerso : MonoBehaviour
         mf_accuracy = mgs_bellScript.mf_currentAccuracy;
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "obstacle")
         {
