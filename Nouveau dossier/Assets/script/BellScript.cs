@@ -54,9 +54,8 @@ public class BellScript : MonoBehaviour
             else
                 mi_indexWantedTransformPos -= 1;
             mt_wantedTransformPosition = mt_bellWantedTransformPos[mi_indexWantedTransformPos];
-            mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
-        
+
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (mi_indexWantedTransformPos == mt_bellWantedTransformPos.Length - 1)
@@ -64,6 +63,10 @@ public class BellScript : MonoBehaviour
             else
                 mi_indexWantedTransformPos += 1;
             mt_wantedTransformPosition = mt_bellWantedTransformPos[mi_indexWantedTransformPos];
+        }
+
+        if (Input.GetKey(KeyCode.Space))
+        {
             mf_bellActionTime = Time.time + mf_bellColorationTime;
         }
 
