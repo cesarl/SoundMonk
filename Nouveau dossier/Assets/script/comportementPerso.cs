@@ -13,6 +13,7 @@ public class comportementPerso : MonoBehaviour
 
     public Texture2D lifeBarFull;
     public Texture2D lifeBarEmpty;
+    public Texture2D lifeBarBack;
 
     public Transform mt_bellTransform;
 
@@ -58,9 +59,12 @@ public class comportementPerso : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, lifeBarEmpty.height), lifeBarFull);
 
-        GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, lifeBarFull.height *  ((100-vie) / vieMax)), lifeBarEmpty);
+        GUI.DrawTexture(new Rect(0, 40, lifeBarBack.width, 0.3f * lifeBarBack.height ), lifeBarBack);
+        GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f* lifeBarEmpty.height * ((vie) / vieMax) ), lifeBarFull);
+
+        GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
+      
 
         GUILayout.Label("Score : " + mf_score);
         GUILayout.Space(-10);
