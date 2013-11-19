@@ -95,7 +95,7 @@ public class EnemyScript
 	void UpdateType0()
 	{
 		this.transform.position = CalculateBezierPoint(_time / speed, _start, _handle1,
-														   _handle2, target.position);
+													   _handle2, target.position);
 	}
 
 	void UpdateType1()

@@ -12,7 +12,6 @@ public class spawner : MonoBehaviour
 	public GameObject note;
 
 	public UnityEngine.Object filePattern;
-	public Transform[] targets;
 	public AudioClip[] sounds;
 
 	private float delay;
@@ -21,6 +20,7 @@ public class spawner : MonoBehaviour
 	private Camera myCamera;
 	private int idx = 0;
 	private int nbNotes;
+	private GameObject[] targets;
 
     BellScript mbs_bellScript;
 
@@ -43,6 +43,7 @@ public class spawner : MonoBehaviour
 		myCamera = Camera.main;
 		loadPattern(AssetDatabase.GetAssetPath(filePattern));
         mbs_bellScript = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<BellScript>();
+		targets = GameObject.FindGameObjectsWithTag("bellSlot");
 	}
 
 
