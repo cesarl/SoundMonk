@@ -50,8 +50,8 @@ public class comportementPerso : MonoBehaviour
         if (collision.gameObject.tag == "note")
         {
             vie -= collision.gameObject.GetComponent<EnemyScript>().damage;
-            audio.clip = sondegatRecu;
-            audio.Play();
+//            audio.clip = sondegatRecu;
+//            audio.Play();
             Destroy( collision.gameObject);
             Debug.Log("vie :" + vie);
         }

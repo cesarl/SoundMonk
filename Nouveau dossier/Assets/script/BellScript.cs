@@ -21,7 +21,7 @@ public class BellScript : MonoBehaviour
     float mf_instantiateSongCount = 0;
     float timeIdle;
     float timeBetweenIdle = 0.1f;
-    int perfectCombo = 0;
+    public int perfectCombo = 0;
 
     int idxIdle;
 
