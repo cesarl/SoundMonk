@@ -74,6 +74,7 @@ public class BonusManager : MonoBehaviour {
     public bool wave = false; 
     public GameObject bell;
     private int _lastPerfect = 0;
+
     public GameObject icon;
     public Sprite shieldIcon;
     public Sprite waveIcon;
@@ -123,7 +124,7 @@ public class BonusManager : MonoBehaviour {
 
     void updateInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+      /*  if (Input.GetKeyDown(KeyCode.E))
         {
             if (shield)
             {
@@ -137,7 +138,7 @@ public class BonusManager : MonoBehaviour {
                 icon.GetComponent<SpriteRenderer>().sprite = null;
                 gameObject.AddComponent<BonusWave>();
             }
-        }
+        }*/
     }
 }
 
