@@ -17,6 +17,7 @@ public class musique : MonoBehaviour {
 
     public int etat = 0;
 
+    public float tempsTotal;
 
 
     public float volumeMusique;
@@ -35,7 +36,7 @@ public class musique : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-
+        if(etat
 
 
         if (fadeout)
