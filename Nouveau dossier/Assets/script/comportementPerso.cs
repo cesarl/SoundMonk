@@ -50,7 +50,7 @@ public class comportementPerso : MonoBehaviour
         //    Debug.Log("vie :" + vie);
         }*/
 
-        if (collision.gameObject.tag == "note")
+        if (collision.gameObject.tag == "note" && !collision.gameObject.GetComponent<EnemyScript>().toKill)
         {
             GameObject.Find("Bell").GetComponent<BellScript>().SendMessage("CalculateAccuracy");
             vie -= collision.gameObject.GetComponent<EnemyScript>().damage;

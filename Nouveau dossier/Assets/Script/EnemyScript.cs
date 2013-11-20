@@ -12,6 +12,7 @@ public class EnemyScript
 	public int typeSon;
     public AudioClip sonDestruction;
 	public Sprite[] sprites;
+	public Sprite[] death;
 
 
 	public int damage;
@@ -25,6 +26,8 @@ public class EnemyScript
 	private int idxIdle;
 	private float timeIdle;
 	private SpriteRenderer spriteRenderer;
+
+    public bool toKill = false;
 
 	public AnimationCurve curve;
 
@@ -46,24 +49,33 @@ public class EnemyScript
 	void Update()
 	{
 		_time += Time.deltaTime;
-		this.transform.position = Vector2.Lerp(_start,
-											   target.transform.position,
-											   _time / speed);
-   
-        if (_time >= speed && _targetPlayerNow == -1)
+
+        if (!toKill)
         {
-            _targetPlayerNow = 0;
-            _start = transform.position;
+
+            this.transform.position = Vector2.Lerp(_start,
+                                                   target.transform.position,
+                                                   _time / speed);
+
+            if (_time >= speed && _targetPlayerNow == -1)
+            {
+                _targetPlayerNow = 0;
+                _start = transform.position;
+            }
+
+            if (_time >= speed)
+            {
+                transform.position = Vector2.Lerp(_start,
+                                                   player.transform.position,
+                                                   _targetPlayerNow / 0.4f);
+                _targetPlayerNow += Time.deltaTime;
+            }
         }
 
-      if (_time >= speed)
+        else
         {
-            transform.position = Vector2.Lerp(_start,
-											   player.transform.position,
-											   _targetPlayerNow / 0.4f);
-            _targetPlayerNow += Time.deltaTime;
+
         }
-        
 
 		timeIdle += Time.deltaTime;
 		if (timeIdle > timeBetweenIdle)
@@ -74,12 +86,30 @@ public class EnemyScript
 		}
 
 
-		Vector3 relativePos = target.position - transform.position;
-		Vector3 test;
-		if (_time >= speed)
-			test = -Vector3.Normalize(player.transform.position - transform.position);
-		else
-			test = -Vector3.Normalize(target.position - transform.position);
-		transform.right = new Vector3(test.x, test.y, 0.0f);
+        if (!toKill)
+        {
+            Vector3 relativePos = target.position - transform.position;
+            Vector3 test;
+            if (_time >= speed)
+                test = -Vector3.Normalize(player.transform.position - transform.position);
+            else
+                test = -Vector3.Normalize(target.position - transform.position);
+            transform.right = new Vector3(test.x, test.y, 0.0f);
+        }
+        else
+        {
+            transform.position += new Vector3(0, 1.0f * Time.deltaTime, 0);
+            if (idxIdle == sprites.Length - 1)
+            {
+                Destroy(gameObject);
+            }
+        }
 	}
+
+    public void kill()
+    {
+        toKill = true;
+        sprites = death;
+        idxIdle = 0;
+    }
 }
