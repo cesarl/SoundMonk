@@ -17,10 +17,6 @@ public class BellScript : MonoBehaviour
     public Transform combo2;
 
     public int maxBonus = 7;
-<<<<<<< HEAD:Nouveau dossier/Assets/Script/BellScript.cs
-=======
-
->>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e:Nouveau dossier/Assets/script/BellScript.cs
 
     public Sprite[] idleSprites;
 
@@ -32,10 +28,6 @@ public class BellScript : MonoBehaviour
     float timeBetweenIdle = 0.1f;
     public int perfectCombo = 0;
     public int nbPerfect =0;
-<<<<<<< HEAD:Nouveau dossier/Assets/Script/BellScript.cs
-=======
-
->>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e:Nouveau dossier/Assets/script/BellScript.cs
 
     int idxIdle;
 
@@ -55,20 +47,15 @@ public class BellScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD:Nouveau dossier/Assets/Script/BellScript.cs
         if (!mb_playerIsDead)
         {
             GetInput();
             MoveBell();
             ApplySpriteRenderer();
         }
-=======
         GetInput();
         MoveBell();
         ApplySpriteRenderer();
-
-
->>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e:Nouveau dossier/Assets/script/BellScript.cs
 
         if (nbPerfect > maxBonus)
         {
@@ -77,18 +64,12 @@ public class BellScript : MonoBehaviour
             if (GameObject.Find("Player").GetComponent<BonusManager>().typeBonus.Equals("Shield"))
             {
                 GameObject.Find("Player").GetComponent<BonusManager>().shield = true;
-<<<<<<< HEAD:Nouveau dossier/Assets/Script/BellScript.cs
                 GameObject.Find("Player").GetComponent<BonusManager>()._shieldIcon.SetActive(true);
-=======
->>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e:Nouveau dossier/Assets/script/BellScript.cs
             }
             else
             {
                 GameObject.Find("Player").GetComponent<BonusManager>().wave = true;
-<<<<<<< HEAD:Nouveau dossier/Assets/Script/BellScript.cs
                GameObject.Find("Player").GetComponent<BonusManager>()._waveIcon.SetActive(true);
-=======
->>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e:Nouveau dossier/Assets/script/BellScript.cs
             }
         }
     }
@@ -185,23 +166,12 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Debug.Log(percent + ", " + dist);
 
-<<<<<<< HEAD:Nouveau dossier/Assets/Script/BellScript.cs
             Destroy(collision.gameObject);
             
             collision.gameObject.GetComponent<EnemyScript>().kill();
            
             audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
             audio.Play();
-=======
-            collision.gameObject.GetComponent<EnemyScript>().kill();
-           
-/*            if (perfectCombo == 3)
-                Debug.Log("Yeah Super Combo !!!");
-            Debug.Log("Combo : " + perfectCombo);*/
-
-           audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
-          audio.Play();
->>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e:Nouveau dossier/Assets/script/BellScript.cs
         }
     }
 
