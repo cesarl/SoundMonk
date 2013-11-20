@@ -53,9 +53,7 @@ public class BellScript : MonoBehaviour
             MoveBell();
             ApplySpriteRenderer();
         }
-        GetInput();
-        MoveBell();
-        ApplySpriteRenderer();
+
 
         if (nbPerfect > maxBonus)
         {
