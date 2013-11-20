@@ -74,8 +74,8 @@ public class BonusManager : MonoBehaviour {
     public bool wave = false; 
     private GameObject bell;
     private int _lastPerfect = 0;
-    public GameObject _shieldIcon;
-    public GameObject _waveIcon;
+    private GameObject _shieldIcon;
+    private GameObject _waveIcon;
 
     public string typeBonus;
 
