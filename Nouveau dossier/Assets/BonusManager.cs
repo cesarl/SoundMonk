@@ -14,12 +14,14 @@ public class Bonus : MonoBehaviour
 
 public class BonusShield : Bonus
 {
+
     public float duration = 7.0f;
     public float radius = 2.0f;
     private float _time;
 
     void Start () {
         _time = 0.0f;
+        GameObject o = Instantiate(Resources.Load("Shield"), GameObject.FindWithTag("Player").transform.position, GameObject.FindWithTag("Player").transform.rotation) as GameObject;
 	}
 	
 	void Update () {
@@ -68,19 +70,23 @@ public class BonusWave : Bonus
 
 public class BonusManager : MonoBehaviour {
 
-    private bool shield = false; 
-    private bool wave = false; 
+    public bool shield = false;
+    public bool wave = false; 
     private GameObject bell;
     private int _lastPerfect = 0;
-    private GameObject _shieldIcon;
-    private GameObject _waveIcon;
+    public GameObject _shieldIcon;
+    public GameObject _waveIcon;
+
+    public string typeBonus;
 
 	void Start () {
         bell = GameObject.Find("Bell");
         _shieldIcon = GameObject.Find("shieldIcon");
-       // _shieldIcon.SetActive(false);
+        _shieldIcon.SetActive(false);
         _waveIcon = GameObject.Find("waveIcon");
-     //   _waveIcon.SetActive(false);
+        _waveIcon.SetActive(false);
+
+        typeBonus = GameObject.Find("BonusSelector").GetComponent<BonusSelector>().bonus;
 	}
 	
 	void Update () {

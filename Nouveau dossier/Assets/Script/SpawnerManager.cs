@@ -114,9 +114,27 @@ public class SpawnerManager : MonoBehaviour
                         son.GetComponent<Renderer>().material.color = notes[idx].color;
                         idx++;
                     }
+<<<<<<< HEAD
                 }
             }
         }
+=======
+                    else
+                        son.audio.clip = sounds2[notes[idx].idSound];
+
+
+					son.audio.Play();
+					son.speed = notes[idx].speed;
+					son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+					son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
+                    son.death = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().death;
+					son.gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+					son.GetComponent<Renderer>().material.color = notes[idx].color;
+					idx++;
+				}
+			}
+		}
+>>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
 	}
 
 	public object XmlDeserializeFromString(string objectData, Type type)

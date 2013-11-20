@@ -42,6 +42,7 @@ public class comportementPerso : MonoBehaviour
     {
         mf_score = mgs_bellScript.mf_score;
         mf_accuracy = mgs_bellScript.mf_currentAccuracy;
+<<<<<<< HEAD
         CheckLife();
     }
 
@@ -60,20 +61,25 @@ public class comportementPerso : MonoBehaviour
             mc_controller2d.mb_playerIsDead = true;
             mb_playerIsDead = true;
         }
+=======
+
+
+
+>>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
     }
 
     void OnTriggerStay2D(Collider2D collision)
     {
 
-        Debug.Log("vie :" + vie);
-        if (collision.gameObject.tag == "obstacles")
+     //   Debug.Log("vie :" + vie);
+       /* if (collision.gameObject.tag == "obstacles")
         {
             Destroy(collision.gameObject);
             vie -= viePerduParObstacle;
-            Debug.Log("vie :" + vie);
-        }
+        //    Debug.Log("vie :" + vie);
+        }*/
 
-        if (collision.gameObject.tag == "note")
+        if (collision.gameObject.tag == "note" && !collision.gameObject.GetComponent<EnemyScript>().toKill)
         {
             GameObject.Find("Bell").GetComponent<BellScript>().SendMessage("CalculateAccuracy");
             vie -= collision.gameObject.GetComponent<EnemyScript>().damage;
@@ -84,7 +90,7 @@ public class comportementPerso : MonoBehaviour
                 audio.Play();
             }
             Destroy( collision.gameObject);
-            Debug.Log("vie :" + vie);
+           // Debug.Log("vie :" + vie);
         }
     }
 
@@ -96,6 +102,7 @@ public class comportementPerso : MonoBehaviour
             GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f * lifeBarEmpty.height * ((vie) / vieMax)), lifeBarFull);
             GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
 
+<<<<<<< HEAD
             GUILayout.Label("Score : " + mf_score);
             GUILayout.Space(-10);
             GUILayout.Label("Concentration : " + (mf_accuracy * 100).ToString("F") + "%");
@@ -104,5 +111,29 @@ public class comportementPerso : MonoBehaviour
         {
             GUI.Label(new Rect(Screen.width/2 - mt_textureGameOver.width/2, Screen.height/2 - mt_textureGameOver.height/2, mt_textureGameOver.width, mt_textureGameOver.height), mt_textureGameOver);
         }
+=======
+        GUI.DrawTexture(new Rect(0, 40, lifeBarBack.width, 0.3f * lifeBarBack.height ), lifeBarBack);
+        GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f* lifeBarEmpty.height * ((vie) / vieMax) ), lifeBarFull);
+
+        GUI.DrawTexture(new Rect(0, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
+
+        //bombe : 7
+        //shield : 7
+        
+
+        GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarBack.width, 0.3f * lifeBarBack.height), lifeBarBack);
+
+        // Debug.Log(GameObject.Find("Bell").GetComponent<BellScript>().nbPerfect);
+
+        GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarEmpty.width, 0.3f * lifeBarEmpty.height *
+            (( GameObject.Find("Bell").GetComponent<BellScript>().nbPerfect/ 7.0f) )), lifeBarFull);
+        GUI.DrawTexture(new Rect(Screen.width - lifeBarBack.width, 40, lifeBarEmpty.width, 0.3f * lifeBarFull.height), lifeBarEmpty);
+
+
+        GUILayout.Label("Score : " + mf_score);
+        GUILayout.Space(-10);
+        GUILayout.Label("Précision : " + (mf_accuracy * 100).ToString("F") + "%");
+
+>>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
     }
 }

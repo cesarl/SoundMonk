@@ -16,6 +16,12 @@ public class BellScript : MonoBehaviour
     public Transform[] mt_bellWantedTransformPos;
     public Transform combo2;
 
+<<<<<<< HEAD
+=======
+    public int maxBonus = 7;
+
+
+>>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
     public Sprite[] idleSprites;
 
     int mi_indexWantedTransformPos = 0;
@@ -25,6 +31,8 @@ public class BellScript : MonoBehaviour
     float timeIdle;
     float timeBetweenIdle = 0.1f;
     public int perfectCombo = 0;
+    public int nbPerfect =0;
+
 
     int idxIdle;
 
@@ -44,17 +52,40 @@ public class BellScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+<<<<<<< HEAD
         if (!mb_playerIsDead)
         {
             GetInput();
             MoveBell();
             ApplySpriteRenderer();
+=======
+        GetInput();
+        MoveBell();
+        ApplySpriteRenderer();
+
+
+
+        if (nbPerfect > maxBonus)
+        {
+            nbPerfect = 0;
+
+            if (GameObject.Find("Player").GetComponent<BonusManager>().typeBonus.Equals("Shield"))
+            {
+                GameObject.Find("Player").GetComponent<BonusManager>().shield = true;
+                GameObject.Find("Player").GetComponent<BonusManager>()._shieldIcon.SetActive(true);
+            }
+            else
+            {
+                GameObject.Find("Player").GetComponent<BonusManager>().wave = true;
+               GameObject.Find("Player").GetComponent<BonusManager>()._waveIcon.SetActive(true);
+            }
+>>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
         }
     }
 
     void GetInput()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.Q))
         {
             if (mi_indexWantedTransformPos == 0)
                 mi_indexWantedTransformPos = mt_bellWantedTransformPos.Length - 1;
@@ -63,7 +94,7 @@ public class BellScript : MonoBehaviour
             mt_wantedTransformPosition = mt_bellWantedTransformPos[mi_indexWantedTransformPos];
         }
 
-        if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             if (mi_indexWantedTransformPos == mt_bellWantedTransformPos.Length - 1)
                 mi_indexWantedTransformPos = 0;
@@ -101,9 +132,8 @@ public class BellScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (this.renderer.material.color == Color.red && collision.tag != "Player")
+        if (this.renderer.material.color == Color.red && collision.tag != "Player" && !collision.tag.Equals("obstacles") && !collision.gameObject.GetComponent<EnemyScript>().toKill)
         {
-
             CalculateAccuracy();
 
             float dist = (10.0f * Vector2.Distance(collision.gameObject.transform.position, mt_wantedTransformPosition.position));
@@ -133,7 +163,10 @@ public class BellScript : MonoBehaviour
                 score *= 10;
 
             if (percent >= 0.6f)
+            {
                 ++perfectCombo;
+                ++nbPerfect;
+            }
             else
                 perfectCombo = 0;
 
@@ -142,10 +175,21 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Debug.Log(percent + ", " + dist);
 
+<<<<<<< HEAD
             Destroy(collision.gameObject);
 
             audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
             audio.Play();
+=======
+            collision.gameObject.GetComponent<EnemyScript>().kill();
+           
+/*            if (perfectCombo == 3)
+                Debug.Log("Yeah Super Combo !!!");
+            Debug.Log("Combo : " + perfectCombo);*/
+
+           audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
+          audio.Play();
+>>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
         }
     }
 
