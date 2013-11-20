@@ -11,9 +11,10 @@ public class BellScript : MonoBehaviour
     public float mf_smoothDamping = 20;
     public float mf_bellColorationTime = 0.1f;
 
+    public bool mb_playerIsDead = false;
+
     public Transform[] mt_bellWantedTransformPos;
     public Transform combo2;
-
 
     public Sprite[] idleSprites;
 
@@ -43,9 +44,12 @@ public class BellScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetInput();
-        MoveBell();
-        ApplySpriteRenderer();
+        if (!mb_playerIsDead)
+        {
+            GetInput();
+            MoveBell();
+            ApplySpriteRenderer();
+        }
     }
 
     void GetInput()
@@ -79,9 +83,7 @@ public class BellScript : MonoBehaviour
         this.transform.position = Vector3.Lerp(this.transform.position, mt_wantedTransformPosition.position, Time.deltaTime * mf_smoothDamping);
 
         if (mf_bellActionTime >= Time.time)
-        {
             this.renderer.material.color = Color.red;
-        }
         else
             this.renderer.material.color = Color.white;
     }
@@ -107,42 +109,28 @@ public class BellScript : MonoBehaviour
             float dist = (10.0f * Vector2.Distance(collision.gameObject.transform.position, mt_wantedTransformPosition.position));
             if (dist > 5.0f)
                 dist = 5;
-            float percent = (5.0f-dist) / 5.0f;
+            float percent = (5.0f - dist) / 5.0f;
             float score = 0;
 
             if (percent < 0.1f)
-            {
                 score += 0;
-            }
             else if (percent < 0.4f)
-            {
                 score += 60;
-            }
             else if (percent < 0.6f)
-            {
                 score += 150;
-            }
             else if (percent < 0.8f)
-            {
                 score += 220;
-            }
             else
                 score += 300.0f;
 
             mf_accuracy += percent;
 
             if (perfectCombo < 5)
-            {
                 score *= 2;
-            }
             else if (perfectCombo < 10)
-            {
                 score *= 5;
-            }
             else if (perfectCombo < 15)
-            {
                 score *= 10;
-            }
 
             if (percent >= 0.6f)
                 ++perfectCombo;
@@ -155,13 +143,9 @@ public class BellScript : MonoBehaviour
             Debug.Log(percent + ", " + dist);
 
             Destroy(collision.gameObject);
-           
-/*            if (perfectCombo == 3)
-                Debug.Log("Yeah Super Combo !!!");
-            Debug.Log("Combo : " + perfectCombo);*/
 
             audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
-          audio.Play();
+            audio.Play();
         }
     }
 
