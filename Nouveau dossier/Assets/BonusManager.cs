@@ -72,20 +72,15 @@ public class BonusManager : MonoBehaviour {
 
     public bool shield = false;
     public bool wave = false; 
-    private GameObject bell;
+    public GameObject bell;
     private int _lastPerfect = 0;
-    private GameObject _shieldIcon;
-    private GameObject _waveIcon;
+    public GameObject icon;
+    public Sprite shieldIcon;
+    public Sprite waveIcon;
 
     public string typeBonus;
 
 	void Start () {
-        bell = GameObject.Find("Bell");
-        _shieldIcon = GameObject.Find("shieldIcon");
-        _shieldIcon.SetActive(false);
-        _waveIcon = GameObject.Find("waveIcon");
-        _waveIcon.SetActive(false);
-
         typeBonus = GameObject.Find("BonusSelector").GetComponent<BonusSelector>().bonus;
 	}
 	
@@ -95,13 +90,13 @@ public class BonusManager : MonoBehaviour {
         if (b.perfectCombo == 10 && _lastPerfect != b.perfectCombo)
         {
             shield = true;
-            _shieldIcon.SetActive(true);
+            icon.GetComponent<SpriteRenderer>().sprite = shieldIcon;
         }
 
         if (b.perfectCombo == 2 && _lastPerfect != b.perfectCombo)
         {
             wave = true;
-            _waveIcon.SetActive(true);
+            icon.GetComponent<SpriteRenderer>().sprite = waveIcon;
         }
 
         if (b.perfectCombo < 2)
@@ -118,7 +113,7 @@ public class BonusManager : MonoBehaviour {
         }
         else
         {
-GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(10);
+            GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(10);
         }
 
 
@@ -133,13 +128,13 @@ GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(10
             if (shield)
             {
                 gameObject.AddComponent<BonusShield>();
-                _shieldIcon.SetActive(false);
+                icon.GetComponent<SpriteRenderer>().sprite = null;
                 shield = false;
             }
             else if (wave)
             {
                 wave = false;
-                _waveIcon.SetActive(false);
+                icon.GetComponent<SpriteRenderer>().sprite = null;
                 gameObject.AddComponent<BonusWave>();
             }
         }
