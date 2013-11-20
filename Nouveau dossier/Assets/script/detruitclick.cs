@@ -12,7 +12,7 @@ public class detruitclick : MonoBehaviour {
     private Vector3 cible;
 	// Use this for initialization
 	void Start () {
-        cible = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), Random.Range(transform.position.y - 5, transform.position.y - 10), 0);
+        cible = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), Random.Range(transform.position.y - 10, 0), 0);
 	}
 	
     
@@ -20,10 +20,10 @@ public class detruitclick : MonoBehaviour {
 	void Update () {
         
         if(Vector3.Distance(  transform.position,cible)<0.1){
-              cible = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), Random.Range(transform.position.y - 5, transform.position.y - 10), 0);
+              cible = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), Random.Range(transform.position.y - 10, 0), 0);
         }
         else
-        transform.position=  Vector3.Lerp(transform.position, cible,Time.deltaTime / 5);
+        transform.position=  Vector3.Lerp(transform.position, cible,Time.deltaTime / 3);
 
         tempsVie -= Time.deltaTime;
         if (tempsVie < 0) Destroy(this.gameObject);
@@ -33,7 +33,7 @@ public class detruitclick : MonoBehaviour {
 
     void OnMouseDown()
     {
-      
+        Debug.Log("Test");
 
         GameObject.Find("Player").GetComponent<comportementPerso>().vie += bonusVie;
 
