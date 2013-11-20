@@ -121,9 +121,8 @@ public class BellScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collision)
     {
-        if (this.renderer.material.color == Color.red && collision.tag != "Player" && !collision.tag.Equals("obstacles") )
+        if (this.renderer.material.color == Color.red && collision.tag != "Player" && !collision.tag.Equals("obstacles") && !collision.gameObject.GetComponent<EnemyScript>().toKill)
         {
-
             CalculateAccuracy();
 
             float dist = (10.0f * Vector2.Distance(collision.gameObject.transform.position, mt_wantedTransformPosition.position));
@@ -179,7 +178,7 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Debug.Log(percent + ", " + dist);
 
-            Destroy(collision.gameObject);
+            collision.gameObject.GetComponent<EnemyScript>().kill();
            
 /*            if (perfectCombo == 3)
                 Debug.Log("Yeah Super Combo !!!");

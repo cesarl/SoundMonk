@@ -108,6 +108,7 @@ public class SpawnerManager : MonoBehaviour
 					son.speed = notes[idx].speed;
 					son.sonDestruction = sounds[notes[idx].idSoundDestruction];
 					son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
+                    son.death = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().death;
 					son.gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
 					son.GetComponent<Renderer>().material.color = notes[idx].color;
 					idx++;
