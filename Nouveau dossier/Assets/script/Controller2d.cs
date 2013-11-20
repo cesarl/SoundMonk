@@ -26,7 +26,7 @@ public class Controller2d : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-		Vector2	dir = new Vector2(0.0f, 0.0f);
+		/*Vector2	dir = new Vector2(0.0f, 0.0f);
 
 		if (Input.GetKey("d"))
 		{
@@ -41,7 +41,7 @@ public class Controller2d : MonoBehaviour
 		else
 			spriteRenderer.sprite = idleSprites[idxIdle];
 
-		trans.Translate(dir * Time.deltaTime);
+		trans.Translate(dir * Time.deltaTime);*/
 
        /* Debug.Log("test");
         for(int i =0; i< GameObject.FindGameObjectsWithTag("note").Length ;i++){
