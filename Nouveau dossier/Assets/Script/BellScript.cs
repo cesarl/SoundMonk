@@ -16,12 +16,8 @@ public class BellScript : MonoBehaviour
     public Transform[] mt_bellWantedTransformPos;
     public Transform combo2;
 
-<<<<<<< HEAD
-=======
     public int maxBonus = 7;
 
-
->>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
     public Sprite[] idleSprites;
 
     int mi_indexWantedTransformPos = 0;
@@ -32,7 +28,6 @@ public class BellScript : MonoBehaviour
     float timeBetweenIdle = 0.1f;
     public int perfectCombo = 0;
     public int nbPerfect =0;
-
 
     int idxIdle;
 
@@ -52,18 +47,12 @@ public class BellScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-<<<<<<< HEAD
         if (!mb_playerIsDead)
         {
             GetInput();
             MoveBell();
             ApplySpriteRenderer();
-=======
-        GetInput();
-        MoveBell();
-        ApplySpriteRenderer();
-
-
+        }
 
         if (nbPerfect > maxBonus)
         {
@@ -79,7 +68,6 @@ public class BellScript : MonoBehaviour
                 GameObject.Find("Player").GetComponent<BonusManager>().wave = true;
                GameObject.Find("Player").GetComponent<BonusManager>()._waveIcon.SetActive(true);
             }
->>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
         }
     }
 
@@ -175,24 +163,14 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Debug.Log(percent + ", " + dist);
 
-<<<<<<< HEAD
             Destroy(collision.gameObject);
-
-            audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
-            audio.Play();
-=======
+            
             collision.gameObject.GetComponent<EnemyScript>().kill();
            
-/*            if (perfectCombo == 3)
-                Debug.Log("Yeah Super Combo !!!");
-            Debug.Log("Combo : " + perfectCombo);*/
-
-           audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
-          audio.Play();
->>>>>>> 16de0ba0e411786deb3a7ce2f5070651427ae5fa
+            audio.clip = collision.gameObject.GetComponent<EnemyScript>().sonDestruction;
+            audio.Play();
         }
     }
-
 
     void CalculateAccuracy()
     {
