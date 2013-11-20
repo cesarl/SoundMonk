@@ -164,6 +164,7 @@ public class BellScript : MonoBehaviour
             mf_currentAccuracy = mf_accuracy / mf_instantiateSongCount;
             Debug.Log(percent + ", " + dist);
 
+
             Destroy(collision.gameObject);
             
             collision.gameObject.GetComponent<EnemyScript>().kill();

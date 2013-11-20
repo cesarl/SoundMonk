@@ -15,6 +15,11 @@ public class Controller2d : MonoBehaviour
 	public Sprite[] idleSprites;
 	public Sprite leftSprite;
 	public Sprite rightSprite;
+	public Sprite[] waveAnim;
+
+	private bool inWaveAnimation;
+	private GameObject animObj;
+	private SpriteRenderer animRenderer;
 
 	// Use this for initialization
 	void Start () {
@@ -22,40 +27,45 @@ public class Controller2d : MonoBehaviour
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 		idxIdle = 0;
 		timeIdle = 0.0f;
+		animObj = GameObject.Find("AnimBomb");
+		animRenderer = animObj.GetComponent<SpriteRenderer>();
+		startWaveAnim();
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		/*Vector2	dir = new Vector2(0.0f, 0.0f);
-
-		if (Input.GetKey("d"))
-		{
-            dir += new Vector2(1.0f, 0.0f) * horizontalSpeed;
-			spriteRenderer.sprite = rightSprite;
-		}
-		else if (Input.GetKey("a") || Input.GetKey("q"))
-		{
-            dir += new Vector2(-1.0f, 0.0f) * horizontalSpeed;
-			spriteRenderer.sprite = leftSprite;
-		}
+	void Update ()
+	{
+		if (inWaveAnimation)
+			animRenderer.sprite = waveAnim[idxIdle];
 		else
 			spriteRenderer.sprite = idleSprites[idxIdle];
-
-		trans.Translate(dir * Time.deltaTime);*/
-
-       /* Debug.Log("test");
-        for(int i =0; i< GameObject.FindGameObjectsWithTag("note").Length ;i++){
-            Debug.Log("test2");
-            Destroy(GameObject.FindGameObjectsWithTag("note")[i]);
-
-            GameObject.FindGameObjectsWithTag("note")[i].transform.Translate(-100.0f * dir * Time.deltaTime);
-        }*/
-
 		timeIdle += Time.deltaTime;
 		if (timeIdle > timeBetweenIdle)
 		{
 			timeIdle = 0.0f;
-			idxIdle = (idxIdle + 1) % idleSprites.Length;
+			if (inWaveAnimation)
+			{
+				idxIdle = (idxIdle + 1) % waveAnim.Length;
+				if (idxIdle == 0)
+					stopWaveAnim();
+			}
+			else
+				idxIdle = (idxIdle + 1) % idleSprites.Length;
 		}
+	}
+
+	public void startWaveAnim()
+	{
+		inWaveAnimation = true;
+		idxIdle = 0;
+		animObj.SetActive(true);
+		renderer.enabled = false;
+	}
+
+	public void stopWaveAnim()
+	{
+		inWaveAnimation = false;
+		animObj.SetActive(false);
+		renderer.enabled = true;
 	}
 }
