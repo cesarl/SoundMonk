@@ -79,6 +79,8 @@ public class BonusManager : MonoBehaviour {
 
     public string typeBonus;
 
+    public string typeBonus;
+
 	void Start () {
         bell = GameObject.Find("Bell");
         _shieldIcon = GameObject.Find("shieldIcon");
