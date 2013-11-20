@@ -54,85 +54,84 @@ public class SpawnerManager : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (!mb_playerIsDead)
-        {
-            GameObject go;
+	void Update()
+	{
+		if (!mb_playerIsDead)
+		{
+			GameObject go;
 
-            if (notes == null)
-                return;
-            if (notes.Count != 0 && idx < notes.Count)
-            {
-                delay += Time.deltaTime;
-                if (delay >= notes[idx].timeSpawn)
-                {
-                    if (notes[idx].type == -1)
-                    {
-                        Vector3 pos = spawners[notes[idx].idTarget].transform.position;
-                        go = Instantiate(noteInvis, pos, Quaternion.identity) as GameObject;
-                        EnemyScript son = go.GetComponent<EnemyScript>();
-                        son.typeSon = notes[idx].type;
-                        son.damage = notes[idx].damage;
-                        son.target = targets[notes[idx].idTarget].transform;
+			if (notes == null)
+				return;
+			if (notes.Count != 0 && idx < notes.Count)
+			{
+				delay += Time.deltaTime;
+				if (delay >= notes[idx].timeSpawn)
+				{
+					if (notes[idx].type == -1)
+					{
+						Vector3 pos = spawners[notes[idx].idTarget].transform.position;
+						go = Instantiate(noteInvis, pos, Quaternion.identity) as GameObject;
+						EnemyScript son = go.GetComponent<EnemyScript>();
+						son.typeSon = notes[idx].type;
+						son.damage = notes[idx].damage;
+						son.target = targets[notes[idx].idTarget].transform;
 
-                        if (soundType == 0)
-                        {
-                            son.audio.clip = sounds[notes[idx].idSound];
-                        }
-                        else
-                            son.audio.clip = sounds2[notes[idx].idSound];
+						if (soundType == 0)
+						{
+							son.audio.clip = sounds[notes[idx].idSound];
+						}
+						else
+							son.audio.clip = sounds2[notes[idx].idSound];
 
-                        son.audio.Play();
-                        son.audio.loop = true;
-                        son.speed = notes[idx].speed;
-                        son.sonDestruction = sounds[notes[idx].idSoundDestruction];
-                        idx++;
-                    }
-                    else
-                    {
-                        Vector3 pos = spawners[notes[idx].idTarget].transform.position;
-                        go = Instantiate(note, pos, Quaternion.identity) as GameObject;
-                        EnemyScript son = go.GetComponent<EnemyScript>();
-                        son.typeSon = notes[idx].type;
-                        son.damage = notes[idx].damage;
-                        son.target = targets[notes[idx].idTarget].transform;
+						son.audio.Play();
+						son.audio.loop = true;
+						son.speed = notes[idx].speed;
+						son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+						idx++;
+					}
+					else
+					{
+						Vector3 pos = spawners[notes[idx].idTarget].transform.position;
+						go = Instantiate(note, pos, Quaternion.identity) as GameObject;
+						EnemyScript son = go.GetComponent<EnemyScript>();
+						son.typeSon = notes[idx].type;
+						son.damage = notes[idx].damage;
+						son.target = targets[notes[idx].idTarget].transform;
 
-                        if (soundType == 0)
-                        {
-                            son.audio.clip = sounds[notes[idx].idSound];
-                        }
-                        else
-                            son.audio.clip = sounds2[notes[idx].idSound];
+						if (soundType == 0)
+						{
+							son.audio.clip = sounds[notes[idx].idSound];
+						}
+						else
+							son.audio.clip = sounds2[notes[idx].idSound];
+						son.audio.Play();
+						son.speed = notes[idx].speed;
+						son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+						son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
+						son.gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+						son.GetComponent<Renderer>().material.color = notes[idx].color;
+						idx++;
+					}
+				}
+			}
+		}
+	}
 
+	public object XmlDeserializeFromString(string objectData, Type type)
+	{
+		var serializer = new XmlSerializer(type);
+		object result;
 
-                        son.audio.Play();
-                        son.speed = notes[idx].speed;
-                        son.sonDestruction = sounds[notes[idx].idSoundDestruction];
-                        son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
-                        son.gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
-                        son.GetComponent<Renderer>().material.color = notes[idx].color;
-                        idx++;
-                    }
-                }
-            }
-        }
-    }
+		using (TextReader reader = new StringReader(objectData))
+		{
+			result = serializer.Deserialize(reader);
+		}
+		return result;
+	}
 
-    public object XmlDeserializeFromString(string objectData, Type type)
-    {
-        var serializer = new XmlSerializer(type);
-        object result;
+	public T XmlDeserializeFromString<T>(string objectData)
+	{
+		return (T)XmlDeserializeFromString(objectData, typeof(T));
+	}
 
-        using (TextReader reader = new StringReader(objectData))
-        {
-            result = serializer.Deserialize(reader);
-        }
-        return result;
-    }
-
-    public T XmlDeserializeFromString<T>(string objectData)
-    {
-        return (T)XmlDeserializeFromString(objectData, typeof(T));
-    }
 }

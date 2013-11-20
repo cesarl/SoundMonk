@@ -42,6 +42,7 @@ public class EnemyScript
 		spriteRenderer = this.gameObject.GetComponent<SpriteRenderer>();
 		idxIdle = 0;
 		timeIdle = 0.0f;
+		if (sprites != null && sprites.Length != 0)
 		spriteRenderer.sprite = sprites[idxIdle];
 	}
 
@@ -78,7 +79,7 @@ public class EnemyScript
         }
 
 		timeIdle += Time.deltaTime;
-		if (timeIdle > timeBetweenIdle)
+		if (sprites != null && sprites.Length != 0 && timeIdle > timeBetweenIdle)
 		{
 			timeIdle = 0.0f;
 			idxIdle = (idxIdle + 1) % sprites.Length;
