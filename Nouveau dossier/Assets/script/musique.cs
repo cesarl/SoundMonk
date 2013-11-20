@@ -36,7 +36,7 @@ public class musique : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if(etat
+       // if(etat
 
 
         if (fadeout)
