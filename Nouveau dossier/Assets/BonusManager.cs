@@ -76,16 +76,22 @@ public class BonusManager : MonoBehaviour {
     private int _lastPerfect = 0;
     public GameObject _shieldIcon;
     public GameObject _waveIcon;
-
+    private bool premier = true;
     public string typeBonus;
 
 	void Start () {
-        bell = GameObject.Find("Bell");
-        _shieldIcon = GameObject.Find("shieldIcon");
-        _shieldIcon.SetActive(false);
-        _waveIcon = GameObject.Find("waveIcon");
-        _waveIcon.SetActive(false);
 
+        if (premier == true)
+        {
+         premier = false;
+
+            bell = GameObject.Find("Bell");
+            _shieldIcon = GameObject.Find("shieldIcon");
+            Debug.Log(_shieldIcon.ToString());
+              _shieldIcon.SetActive(false);
+            _waveIcon = GameObject.Find("waveIcon");
+               _waveIcon.SetActive(false);
+        }
         typeBonus = GameObject.Find("BonusSelector").GetComponent<BonusSelector>().bonus;
 	}
 	
@@ -128,7 +134,7 @@ GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(10
 
     void updateInput()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+      /*  if (Input.GetKeyDown(KeyCode.E))
         {
             if (shield)
             {
@@ -142,7 +148,7 @@ GameObject.Find("multiplicator").GetComponent<MultiplicatorIcon>().updateIcon(10
                 _waveIcon.SetActive(false);
                 gameObject.AddComponent<BonusWave>();
             }
-        }
+        }*/
     }
 }
 
