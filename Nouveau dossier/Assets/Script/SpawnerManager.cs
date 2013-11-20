@@ -114,6 +114,7 @@ public class SpawnerManager : MonoBehaviour
                         son.GetComponent<Renderer>().material.color = notes[idx].color;
                         idx++;
                     }
+<<<<<<< HEAD
                 }
             }
         }
@@ -135,4 +136,39 @@ public class SpawnerManager : MonoBehaviour
     {
         return (T)XmlDeserializeFromString(objectData, typeof(T));
     }
+=======
+                    else
+                        son.audio.clip = sounds2[notes[idx].idSound];
+
+
+					son.audio.Play();
+					son.speed = notes[idx].speed;
+					son.sonDestruction = sounds[notes[idx].idSoundDestruction];
+					son.sprites = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().sprites;
+                    son.death = spritesTab[notes[idx].idSprite].GetComponent<NoteSpriteTab>().death;
+					son.gameObject.transform.localScale = new Vector3(0.2f, 0.2f, 0.2f);
+					son.GetComponent<Renderer>().material.color = notes[idx].color;
+					idx++;
+				}
+			}
+		}
+	}
+
+	public object XmlDeserializeFromString(string objectData, Type type)
+	{
+		var serializer = new XmlSerializer(type);
+		object result;
+
+		using (TextReader reader = new StringReader(objectData))
+		{
+			result = serializer.Deserialize(reader);
+		}
+		return result;
+	}
+
+	public T XmlDeserializeFromString<T>(string objectData)
+	{
+		return (T)XmlDeserializeFromString(objectData, typeof(T));
+	}
+>>>>>>> e89657a5a58aac83a3d5db20c538968eee1d515e
 }
